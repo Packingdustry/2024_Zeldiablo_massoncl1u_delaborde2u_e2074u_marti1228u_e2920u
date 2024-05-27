@@ -20,14 +20,14 @@ public class LabyDessin implements DessinJeu {
         gc.setFill(Color.LIGHTGRAY);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        // dessin murs
-        gc.setFill(Color.BLACK);
+        // dessin laby
         Labyrinthe laby = labyJeu.getLabyrinthe();
         int tailleY = laby.getLengthY();
         int taille = laby.getLength();
         for (int x = 0; x < taille; x++) {
             for (int y = 0; y < tailleY; y++) {
                 if (laby.getMur(x, y)) {
+                    gc.setFill(Color.BLACK);
                     gc.fillRect(
                          (labyJeu.HEIGHT/taille) * x,
                         (labyJeu.WIDTH/tailleY) * y,
@@ -36,6 +36,7 @@ public class LabyDessin implements DessinJeu {
                     );
                 }
                 if (laby.pj.etrePresent(x, y)) {
+                    gc.setFill(Color.RED);
                     gc.fillOval(
                         (labyJeu.HEIGHT/taille) * x,
                         (labyJeu.WIDTH/tailleY) * y,
