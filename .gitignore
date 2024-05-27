@@ -1,0 +1,9 @@
+# Fichiers IntelliJ
+*.iml
+*.idea
+
+# Fichier .class
+*.class
+
+# Fichiers liés au système 
+Thumbs.db
