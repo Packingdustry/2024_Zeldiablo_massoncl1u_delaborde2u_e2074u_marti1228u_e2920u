@@ -7,6 +7,8 @@ import javax.swing.plaf.LabelUI;
 import java.io.IOException;
 
 public class LabyJeu implements Jeu {
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 600;
     public static final String FICHIER = "labySimple/laby1.txt";
 
     private final Labyrinthe labyrinthe;
@@ -35,12 +37,14 @@ public class LabyJeu implements Jeu {
     }
 
     @Override
-    public void init() {
-
-    }
+    public void init() {}
 
     @Override
     public boolean etreFini() {
         return false;
+    }
+
+    public Labyrinthe getLabyrinthe() {
+        return labyrinthe;
     }
 }
