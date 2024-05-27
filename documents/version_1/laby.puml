@@ -1,0 +1,31 @@
+@startuml
+class Labyrinthe {
+  + MUR : String
+  + PJ : String
+  + VIDE : String
+  + HAUT : String
+  + BAS  : String
+  + GAUCHE : String
+  + DROITE : String
+  + murs : boolean[][]
+  + Labyrinthe(String)
+  + {static} getSuivant(int, int, String) : int[]
+  + deplacerPerso(String) : void
+  + etreFini() : boolean
+  + getLengthY() : int
+  + getLength() : int
+  + getMur(int, int) : boolean
+}
+
+class Perso {
+  - x : int
+  - y : int
+  + Perso(int, int)
+  + etrePresent(int, int) : boolean
+  + getX() : int
+  + getY() : int
+}
+
+'''relations
+Labyrinthe "*" -> "1" Perso : + pj
+@enduml
