@@ -1,0 +1,72 @@
+@startuml
+package moteurJeu {
+
+interface Jeu{
++ init()
++ update(seconds: double, clavier: Clavier)
++ etreFini(): boolean
+}
+
+
+interface DessinJeu {
++ dessinerJeu(jeu: Jeu, canvas: Canvas)
+}
+}
+
+package gameArkanoid{
+
+class LabyJeu{
++ {static} WIDTH : int
++ {static} HEIGHT : int
++ {static} FICHIER : String
++ LabyJeu()
++ init() : void
++ update(seconds: double, clavier: Clavier) : void
++ etreFini(): boolean
++ getLabyrinthe() : Labyrinthe
+}
+
+class Labyrinthe {
+  + MUR : String
+  + PJ : String
+  + VIDE : String
+  + HAUT : String
+  + BAS  : String
+  + GAUCHE : String
+  + DROITE : String
+  + murs : boolean[][]
+  + Labyrinthe(String)
+  + {static} getSuivant(int, int, String) : int[]
+  + deplacerPerso(String) : void
+  + etreFini() : boolean
+  + getLengthY() : int
+  + getLength() : int
+  + getMur(int, int) : boolean
+}
+
+Jeu <|.. LabyJeu
+
+
+LabyJeu "1" --> "1" Labyrinthe : -labyrinthe
+
+
+class LabyDessin{
++ dessinerJeu(jeu: Jeu, canvas: Canvas)
+}
+
+DessinJeu <|.. LabyDessin
+LabyJeu <. LabyDessin:uses
+
+
+class Perso {
+  - x : int
+  - y : int
+  + Perso(int, int)
+  + etrePresent(int, int) : boolean
+  + getX() : int
+  + getY() : int
+}
+
+Labyrinthe "*" -> "1" Perso : + pj
+}
+@enduml
