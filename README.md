@@ -1,5 +1,4 @@
 Aloïs MASSON--CLAUDEZ
 Baptiste DELABORDE
 Quentin DIEUDONNÉ
-Clément VALLÉE
-Léo MARTIN
+
