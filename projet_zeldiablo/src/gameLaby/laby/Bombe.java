@@ -17,16 +17,16 @@ public class Bombe extends Perso{
         p.vie-=dgt;
     }
 
-    /*public void explose(){
+   public void explose(Labyrinthe laby){
         int x = this.getX();
         int y = this.getY();
-        for(int i=x;i<=x+3;i++){
-            for(int j=y;j<=j+3;j++){
-              Perso p = Labyrinthe.getPerso(i,j);
+        for(int i=x-1; i<=x+1; i++){
+            for(int j=y-1; j<=j+1; j++){
+              Perso p = laby.getPerso(i,j);
               if(p!=null){
                   this.mettredgt(p);
               }
             }
         }
-    }*/
+    }
 }

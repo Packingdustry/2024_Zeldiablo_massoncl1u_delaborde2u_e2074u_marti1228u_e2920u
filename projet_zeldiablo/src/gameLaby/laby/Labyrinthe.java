@@ -19,6 +19,7 @@ public class Labyrinthe {
     public static final char MUR = 'X';
     public static final char PJ = 'P';
     public static final char VIDE = '.';
+    public static final char BOMBE = 'B';
 
     /**
      * constantes actions possibles
@@ -122,6 +123,10 @@ public class Labyrinthe {
                         this.murs[colonne][numeroLigne] = false;
                         this.persos.add(new Monstre(10, 50, colonne, numeroLigne));
                         break;
+                    case BOMBE:
+                        this.murs[colonne][numeroLigne] = false;
+                        this.persos.add(new Bombe(colonne, numeroLigne, 10));
+                        break;
                     default:
                         throw new Error("caractere inconnu " + c);
                 }
@@ -204,10 +209,14 @@ public class Labyrinthe {
     public void verifierMonstre() {
         int x = persos.get(0).getX();
         int y = persos.get(0).getY();
-        if (getMonstre(x, y) != null) {
+        if (getMonstre(x, y) != null && !(getMonstre(x, y) instanceof Bombe)) {
             Joueur j = (Joueur) persos.get(0);
-            Monstre m = getMonstre(x, y);
+            Monstre m = (Monstre) getMonstre(x, y);
             j.subirDegats(m.infligerDegat());
+        } else if (getMonstre(x, y) != null && !(getMonstre(x, y) instanceof Bombe)) {
+            Joueur j = (Joueur) persos.get(0);
+            Bombe b = (Bombe) getMonstre(x, y);
+            b.explose(this);
         }
     }
 
@@ -220,10 +229,10 @@ public class Labyrinthe {
         return null;
     }
 
-    public Monstre getMonstre(int x, int y) {
+    public Perso getMonstre(int x, int y) {
         for (int i = 1; i < persos.size(); i++) {
             if (persos.get(i).getX() == x && persos.get(i).getY() == y) {
-                return (Monstre) persos.get(i);
+                return persos.get(i);
             }
         }
         return null;
