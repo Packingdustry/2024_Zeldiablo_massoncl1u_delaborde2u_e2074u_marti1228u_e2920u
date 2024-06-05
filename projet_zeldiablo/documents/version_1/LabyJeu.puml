@@ -13,7 +13,7 @@ interface DessinJeu {
 }
 }
 
-package gameArkanoid{
+package gameLaby{
 
 class LabyJeu{
 + {static} WIDTH : int
@@ -27,9 +27,10 @@ class LabyJeu{
 }
 
 class Labyrinthe {
-  + MUR : String
-  + PJ : String
-  + VIDE : String
+  + MUR : char
+  + PJ : char
+  + MONSTRE : char
+  + VIDE : char
   + HAUT : String
   + BAS  : String
   + GAUCHE : String
@@ -44,6 +45,7 @@ class Labyrinthe {
   + getMur(int, int) : boolean
 }
 
+
 Jeu <|.. LabyJeu
 
 
@@ -57,16 +59,31 @@ class LabyDessin{
 DessinJeu <|.. LabyDessin
 LabyJeu <. LabyDessin:uses
 
-
 class Perso {
   - x : int
   - y : int
-  + Perso(int, int)
+  + Perso(int, int, int)
   + etrePresent(int, int) : boolean
   + getX() : int
   + getY() : int
+  + getVie() : int
 }
 
-Labyrinthe "*" -> "1" Perso : + pj
+class Joueur extends Perso{
+  + Joueur(int, int, int)
+  + subirDegats(int)
+}
+
+class Monstre extends Perso {
+  - degats : int
+  + Monstre(int, int, int, int)
+  + infligerDegat() : int
+}
+class Bombe extends Perso {
+  + Bombe(int, int, int)
+  + mettreDegat(Perso p)
+  + explose()
+}
+Labyrinthe "*" -> "*" Perso : + pj
 }
 @enduml
