@@ -58,4 +58,8 @@ public class Perso {
         //getter
         return this.y;
     }
+
+    public int getVie(){
+        return this.vie;
+    }
 }

@@ -11,7 +11,7 @@ public class Joueur extends Perso{
         super(dx, dy, pv);
     }
 
-    public void subirDegats(){
-        this.vie--;
+    public void subirDegats(int pv){
+        this.vie-=pv;
     }
 }
