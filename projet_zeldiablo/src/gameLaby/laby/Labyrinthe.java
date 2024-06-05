@@ -127,12 +127,12 @@ public class Labyrinthe {
                         this.murs[colonne][numeroLigne] = false;
                         this.monstresXY[colonne][numeroLigne] = false;
                         // ajoute PJ
-                        this.pj = new Perso(100, colonne, numeroLigne);
+                        this.pj = new Perso(colonne, numeroLigne, 100);
                         break;
                     case MONSTRE:
                         this.monstresXY[colonne][numeroLigne] = true;
                         this.murs[colonne][numeroLigne] = false;
-                        this.monstres.add(new Monstre(50, colonne, numeroLigne));
+                        this.monstres.add(new Monstre(colonne, numeroLigne, 50));
                         break;
                     default:
                         throw new Error("caractere inconnu " + c);
