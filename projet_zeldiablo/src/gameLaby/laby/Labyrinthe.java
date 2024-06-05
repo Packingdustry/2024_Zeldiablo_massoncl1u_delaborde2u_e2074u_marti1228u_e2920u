@@ -29,11 +29,6 @@ public class Labyrinthe {
     public static final String DROITE = "Droite";
 
     /**
-     * attribut du personnage
-     */
-    public Joueur pj;
-
-    /**
      * les murs du labyrinthe
      */
     public boolean[][] murs;
@@ -41,8 +36,7 @@ public class Labyrinthe {
     /**
      * Monstres présents dans le labyrinthe
      */
-    public ArrayList<Monstre> monstres;
-    public boolean[][] monstresXY;
+    public ArrayList<Perso> persos;
 
     /**
      * retourne la case suivante selon une actions
@@ -97,9 +91,7 @@ public class Labyrinthe {
 
         // creation labyrinthe vide
         this.murs = new boolean[nbColonnes][nbLignes];
-        this.monstresXY = new boolean[nbColonnes][nbLignes];
-        this.monstres = new ArrayList<Monstre>();
-        this.pj = null;
+        this.persos = new ArrayList<Perso>();
 
         // lecture des cases
         String ligne = bfRead.readLine();
@@ -116,23 +108,19 @@ public class Labyrinthe {
                 switch (c) {
                     case MUR:
                         this.murs[colonne][numeroLigne] = true;
-                        this.monstresXY[colonne][numeroLigne] = false;
                         break;
                     case VIDE:
                         this.murs[colonne][numeroLigne] = false;
-                        this.monstresXY[colonne][numeroLigne] = false;
                         break;
                     case PJ:
                         // pas de mur
                         this.murs[colonne][numeroLigne] = false;
-                        this.monstresXY[colonne][numeroLigne] = false;
                         // ajoute PJ
-                        this.pj = new Joueur(colonne, numeroLigne, 100);
+                        this.persos.add(0, new Joueur(colonne, numeroLigne, 100));
                         break;
                     case MONSTRE:
-                        this.monstresXY[colonne][numeroLigne] = true;
                         this.murs[colonne][numeroLigne] = false;
-                        this.monstres.add(new Monstre(10, 50, colonne, numeroLigne));
+                        this.persos.add(new Monstre(10, 50, colonne, numeroLigne));
                         break;
                     default:
                         throw new Error("caractere inconnu " + c);
@@ -157,7 +145,7 @@ public class Labyrinthe {
      */
     public void deplacerPerso(String action) {
         // case courante
-        int[] courante = {this.pj.x, this.pj.y};
+        int[] courante = {this.persos.get(0).x, this.persos.get(0).y};
 
         // calcule case suivante
         int[] suivante = getSuivant(courante[0], courante[1], action);
@@ -165,8 +153,8 @@ public class Labyrinthe {
         // si c'est pas un mur, on effectue le deplacement
         if (!this.murs[suivante[0]][suivante[1]]) {
             // on met a jour personnage
-            this.pj.x = suivante[0];
-            this.pj.y = suivante[1];
+            this.persos.get(0).x = suivante[0];
+            this.persos.get(0).y = suivante[1];
         }
         this.verifierMonstre();
     }
@@ -214,15 +202,5 @@ public class Labyrinthe {
         return this.murs[x][y];
     }
 
-    public boolean getMonstre(int x, int y) {
-        // utilise le tableau de boolean
-        return this.monstresXY[x][y];
-    }
 
-    public void verifierMonstre() {
-        if (monstresXY[pj.getX()][pj.getY()]) {
-            pj.subirDegats(monstres.getFirst().infligerDegat());
-            System.out.println(pj.vie);
-        }
-    }
 }
