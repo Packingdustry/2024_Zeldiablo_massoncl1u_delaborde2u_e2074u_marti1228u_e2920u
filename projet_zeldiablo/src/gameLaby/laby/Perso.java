@@ -10,6 +10,10 @@ public class Perso {
      * position du personnage
      */
     int x, y;
+    /**
+     * points de vie du personnage
+     */
+    int vie;
 
     /**
      * constructeur
@@ -17,9 +21,10 @@ public class Perso {
      * @param dx position selon x
      * @param dy position selon y
      */
-    public Perso(int dx, int dy) {
+    public Perso(int dx, int dy, int pv) {
         this.x = dx;
         this.y = dy;
+        this.vie = pv;
     }
 
     /**
