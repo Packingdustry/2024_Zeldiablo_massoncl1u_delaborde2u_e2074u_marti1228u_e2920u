@@ -12,6 +12,7 @@ public class LabyJeu implements Jeu {
     public static final String FICHIER = "labySimple/laby2.txt";
 
     private final Labyrinthe labyrinthe;
+    private boolean fin = false;
 
     public LabyJeu() throws IOException {
         labyrinthe = new Labyrinthe(FICHIER);
@@ -30,7 +31,10 @@ public class LabyJeu implements Jeu {
         }
         labyrinthe.verifierMonstre();
         etreFini();
-        System.out.println(etreFini());
+        if (etreFini()&&!fin) {
+            fin = true;
+            System.out.println("Fin du jeu");
+        }
     }
 
     @Override

@@ -208,7 +208,6 @@ public class Labyrinthe {
             Joueur j = (Joueur) persos.get(0);
             Monstre m = getMonstre(x, y);
             j.subirDegats(m.infligerDegat());
-            System.out.println(j.vie);
         }
     }
 
