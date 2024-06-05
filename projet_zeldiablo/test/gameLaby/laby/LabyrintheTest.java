@@ -31,9 +31,42 @@ class LabyrintheTest {
     @Test
     void testGetVie(){
         Perso principal = new Perso(2,3,50);
-        Monstre m = new Monstre(5,50,3,3);
         assertEquals(50,principal.getVie(),"Cela doit renvoyer 50 pvs");
+    }
+
+    @Test
+    void testInfligerDegats(){
+        Perso principal = new Perso(2,3,50);
+        Monstre m = new Monstre(5,50,3,3);
         principal.vie-=m.infligerDegat();
         assertEquals(45,principal.getVie(),"Cela doit renvoyer 45 pvs car le perso s'est fait frapper");
+    }
+
+    @Test
+    void testGetMur() throws IOException {
+        Labyrinthe l = new Labyrinthe("labySimple/laby0.txt");
+        assertEquals(true,l.getMur(0,0),"la case 0,0 doit etre un mur");
+    }
+
+    @Test
+    void testGetLength() throws IOException {
+        Labyrinthe l = new Labyrinthe("labySimple/laby0.txt");
+        assertEquals(7,l.getLength(),"le tableau de murs a une longueur de 7");
+    }
+
+    @Test
+    void testSubirDegats(){
+        Joueur principal = new Joueur(2,3,50);
+        principal.subirDegats(32);
+        assertEquals(18,principal.getVie(),"le personnage doit avoir 18 pv car il en a perdu 32");
+    }
+
+    @Test
+    void testMettreDegats(){
+        Bombe b = new Bombe(2,2,20);
+        Perso principal = new Perso(3,3,50);
+        assertEquals(50,principal.getVie(),"Cela doit renvoyer 50 pvs");
+        b.mettredgt(principal);
+        assertEquals(30,principal.getVie(),"le perso a subi 20 degats de la bombe, il a donc 30 pv");
     }
 }
