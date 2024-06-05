@@ -28,6 +28,7 @@ public class LabyJeu implements Jeu {
         }else if (clavier.haut) {
             labyrinthe.deplacerPerso(Labyrinthe.HAUT);
         }
+        labyrinthe.verifierMonstre();
     }
 
     @Override
