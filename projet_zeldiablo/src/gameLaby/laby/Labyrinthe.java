@@ -31,7 +31,7 @@ public class Labyrinthe {
     /**
      * attribut du personnage
      */
-    public Perso pj;
+    public Joueur pj;
 
     /**
      * les murs du labyrinthe
@@ -127,12 +127,12 @@ public class Labyrinthe {
                         this.murs[colonne][numeroLigne] = false;
                         this.monstresXY[colonne][numeroLigne] = false;
                         // ajoute PJ
-                        this.pj = new Perso(colonne, numeroLigne, 100);
+                        this.pj = new Joueur(colonne, numeroLigne, 100);
                         break;
                     case MONSTRE:
                         this.monstresXY[colonne][numeroLigne] = true;
                         this.murs[colonne][numeroLigne] = false;
-                        this.monstres.add(new Monstre(colonne, numeroLigne, 50));
+                        this.monstres.add(new Monstre(10, 50, colonne, numeroLigne));
                         break;
                     default:
                         throw new Error("caractere inconnu " + c);
@@ -168,6 +168,7 @@ public class Labyrinthe {
             this.pj.x = suivante[0];
             this.pj.y = suivante[1];
         }
+        this.verifierMonstre();
     }
 
 
@@ -216,5 +217,12 @@ public class Labyrinthe {
     public boolean getMonstre(int x, int y) {
         // utilise le tableau de boolean
         return this.monstresXY[x][y];
+    }
+
+    public void verifierMonstre() {
+        if (monstresXY[pj.getX()][pj.getY()]) {
+            pj.subirDegats(monstres.getFirst().infligerDegat());
+            System.out.println(pj.vie);
+        }
     }
 }
