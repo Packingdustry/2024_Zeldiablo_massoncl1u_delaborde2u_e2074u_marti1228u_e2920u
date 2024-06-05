@@ -3,6 +3,7 @@ package gameLaby.laby;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * classe labyrinthe. represente un labyrinthe avec
@@ -14,6 +15,7 @@ public class Labyrinthe {
     /**
      * Constantes char
      */
+    public static final char MONSTRE = 'M';
     public static final char MUR = 'X';
     public static final char PJ = 'P';
     public static final char VIDE = '.';
@@ -35,6 +37,12 @@ public class Labyrinthe {
      * les murs du labyrinthe
      */
     public boolean[][] murs;
+
+    /**
+     * Monstres présents dans le labyrinthe
+     */
+    public ArrayList<Monstre> monstres;
+    public boolean[][] monstresXY;
 
     /**
      * retourne la case suivante selon une actions
@@ -89,6 +97,8 @@ public class Labyrinthe {
 
         // creation labyrinthe vide
         this.murs = new boolean[nbColonnes][nbLignes];
+        this.monstresXY = new boolean[nbColonnes][nbLignes];
+        this.monstres = new ArrayList<Monstre>();
         this.pj = null;
 
         // lecture des cases
@@ -106,17 +116,24 @@ public class Labyrinthe {
                 switch (c) {
                     case MUR:
                         this.murs[colonne][numeroLigne] = true;
+                        this.monstresXY[colonne][numeroLigne] = false;
                         break;
                     case VIDE:
                         this.murs[colonne][numeroLigne] = false;
+                        this.monstresXY[colonne][numeroLigne] = false;
                         break;
                     case PJ:
                         // pas de mur
                         this.murs[colonne][numeroLigne] = false;
+                        this.monstresXY[colonne][numeroLigne] = false;
                         // ajoute PJ
-                        this.pj = new Perso(colonne, numeroLigne);
+                        this.pj = new Perso(100, colonne, numeroLigne);
                         break;
-
+                    case MONSTRE:
+                        this.monstresXY[colonne][numeroLigne] = true;
+                        this.murs[colonne][numeroLigne] = false;
+                        this.monstres.add(new Monstre(50, colonne, numeroLigne));
+                        break;
                     default:
                         throw new Error("caractere inconnu " + c);
                 }
@@ -194,5 +211,10 @@ public class Labyrinthe {
     public boolean getMur(int x, int y) {
         // utilise le tableau de boolean
         return this.murs[x][y];
+    }
+
+    public boolean getMonstre(int x, int y) {
+        // utilise le tableau de boolean
+        return this.monstresXY[x][y];
     }
 }

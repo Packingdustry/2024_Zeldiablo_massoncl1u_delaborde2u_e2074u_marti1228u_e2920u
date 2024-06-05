@@ -29,23 +29,31 @@ public class LabyDessin implements DessinJeu {
                 if (laby.getMur(x, y)) {
                     gc.setFill(Color.BLACK);
                     gc.fillRect(
-                         (labyJeu.HEIGHT/taille) * x,
-                        (labyJeu.WIDTH/tailleY) * y,
-                        labyJeu.HEIGHT/taille,
-                        labyJeu.WIDTH/tailleY
+                            (labyJeu.HEIGHT / taille) * x,
+                            (labyJeu.WIDTH / tailleY) * y,
+                            labyJeu.HEIGHT / taille,
+                            labyJeu.WIDTH / tailleY
                     );
                 }
                 if (laby.pj.etrePresent(x, y)) {
+                    gc.setFill(Color.BLUE);
+                    gc.fillOval(
+                            (labyJeu.HEIGHT / taille) * x,
+                            (labyJeu.WIDTH / tailleY) * y,
+                            labyJeu.HEIGHT / taille,
+                            labyJeu.WIDTH / tailleY
+                    );
+                }
+                if (laby.getMonstre(x, y)) {
                     gc.setFill(Color.RED);
                     gc.fillOval(
-                        (labyJeu.HEIGHT/taille) * x,
-                        (labyJeu.WIDTH/tailleY) * y,
-                        labyJeu.HEIGHT/taille,
-                        labyJeu.WIDTH/tailleY
+                            (labyJeu.HEIGHT / taille) * x,
+                            (labyJeu.WIDTH / tailleY) * y,
+                            labyJeu.HEIGHT / taille,
+                            labyJeu.WIDTH / tailleY
                     );
                 }
             }
         }
-
     }
 }

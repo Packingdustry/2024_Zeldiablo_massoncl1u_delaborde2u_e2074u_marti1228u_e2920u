@@ -9,7 +9,7 @@ import java.io.IOException;
 public class LabyJeu implements Jeu {
     public static final int WIDTH = 600;
     public static final int HEIGHT = 800;
-    public static final String FICHIER = "labySimple/laby1.txt";
+    public static final String FICHIER = "labySimple/laby2.txt";
 
     private final Labyrinthe labyrinthe;
 
