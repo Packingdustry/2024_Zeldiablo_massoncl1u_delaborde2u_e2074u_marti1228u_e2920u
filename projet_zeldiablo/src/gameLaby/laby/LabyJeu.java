@@ -29,6 +29,8 @@ public class LabyJeu implements Jeu {
             labyrinthe.deplacerPerso(Labyrinthe.HAUT);
         }
         labyrinthe.verifierMonstre();
+        etreFini();
+        System.out.println(etreFini());
     }
 
     @Override
@@ -36,7 +38,10 @@ public class LabyJeu implements Jeu {
 
     @Override
     public boolean etreFini() {
-        return false;
+        boolean fin = false;
+        if (labyrinthe.persos.get(0).getVie() <= 0)
+            fin = true;
+        return fin;
     }
 
     public Labyrinthe getLabyrinthe() {

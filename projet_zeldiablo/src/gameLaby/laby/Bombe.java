@@ -17,7 +17,7 @@ public class Bombe extends Perso{
         p.vie-=dgt;
     }
 
-    public void explose(){
+   /* public void explose(){
         int x = this.getX();
         int y = this.getY();
         for(int i=x;i<=x+3;i++){
@@ -28,5 +28,5 @@ public class Bombe extends Perso{
               }
             }
         }
-    }
+    }*/
 }
