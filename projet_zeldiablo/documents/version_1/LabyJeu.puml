@@ -72,17 +72,17 @@ class Perso {
   + getVie() : int
 }
 
-class Joueur extends Perso{
+class Joueur #pink extends Perso{
   + Joueur(int, int, int)
   + subirDegats(int)
 }
 
-class Monstre extends Perso {
+class Monstre #pink extends Perso {
   - degats : int
   + Monstre(int, int, int, int)
   + infligerDegat() : int
 }
-class Bombe extends Perso {
+class Bombe #pink extends Perso {
   + Bombe(int, int, int)
   + mettreDegat(Perso p)
   + explose()
