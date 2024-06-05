@@ -11,7 +11,7 @@ public class Monstre extends Perso {
      * @param dy  position selon y
      */
     public Monstre(int degats, int vie, int dx, int dy) {
-        super(vie, dx, dy);
+        super(dx, dy, vie);
         this.degats = degats;
     }
 

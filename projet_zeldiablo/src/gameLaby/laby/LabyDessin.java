@@ -35,7 +35,7 @@ public class LabyDessin implements DessinJeu {
                             labyJeu.WIDTH / tailleY
                     );
                 }
-                if (laby.pj.etrePresent(x, y)) {
+                if (laby.persos.get(0).etrePresent(x, y)) {
                     gc.setFill(Color.BLUE);
                     gc.fillOval(
                             (labyJeu.HEIGHT / taille) * x,
@@ -44,7 +44,7 @@ public class LabyDessin implements DessinJeu {
                             labyJeu.WIDTH / tailleY
                     );
                 }
-                if (laby.getMonstre(x, y)) {
+                if (laby.getPerso(x, y) != null && laby.getPerso(x, y) instanceof Monstre) {
                     gc.setFill(Color.RED);
                     gc.fillOval(
                             (labyJeu.HEIGHT / taille) * x,

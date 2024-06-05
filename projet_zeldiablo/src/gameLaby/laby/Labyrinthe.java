@@ -156,7 +156,6 @@ public class Labyrinthe {
             this.persos.get(0).x = suivante[0];
             this.persos.get(0).y = suivante[1];
         }
-        this.verifierMonstre();
     }
 
 
@@ -202,5 +201,32 @@ public class Labyrinthe {
         return this.murs[x][y];
     }
 
+    public void verifierMonstre() {
+        int x = persos.get(0).getX();
+        int y = persos.get(0).getY();
+        if (getMonstre(x, y) != null) {
+            Joueur j = (Joueur) persos.get(0);
+            Monstre m = getMonstre(x, y);
+            j.subirDegats(m.infligerDegat());
+            System.out.println(j.vie);
+        }
+    }
 
+    public Perso getPerso(int x, int y) {
+        for (Perso perso : persos) {
+            if (perso.getX() == x && perso.getY() == y) {
+                return perso;
+            }
+        }
+        return null;
+    }
+
+    public Monstre getMonstre(int x, int y) {
+        for (int i = 1; i < persos.size(); i++) {
+            if (persos.get(i).getX() == x && persos.get(i).getY() == y) {
+                return (Monstre) persos.get(i);
+            }
+        }
+        return null;
+    }
 }
