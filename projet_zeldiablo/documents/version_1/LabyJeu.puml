@@ -43,6 +43,9 @@ class Labyrinthe {
   + getLengthY() : int
   + getLength() : int
   + getMur(int, int) : boolean
+  + getMonstre(int, int) : Monstre
+  + verifierMonstre()
+  + getPerso(int, int) : Perso
 }
 
 
