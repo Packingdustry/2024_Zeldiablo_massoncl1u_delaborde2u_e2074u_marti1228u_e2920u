@@ -27,4 +27,13 @@ class LabyrintheTest {
         assertEquals(null,l.getMonstre(3,4),"La methode doit renvoyer null car le monstre nest pas en 3,4");
         assertEquals(m,l.getPerso(3,3),"La methode doit renvoyer le monstre car il est bien en 3,3");
     }
+
+    @Test
+    void testGetVie(){
+        Perso principal = new Perso(2,3,50);
+        Monstre m = new Monstre(5,50,3,3);
+        assertEquals(50,principal.getVie(),"Cela doit renvoyer 50 pvs");
+        principal.vie-=m.infligerDegat();
+        assertEquals(45,principal.getVie(),"Cela doit renvoyer 45 pvs car le perso s'est fait frapper");
+    }
 }
