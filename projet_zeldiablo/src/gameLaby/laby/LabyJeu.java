@@ -1,5 +1,6 @@
 package gameLaby.laby;
 
+import javafx.application.Platform;
 import moteurJeu.Clavier;
 import moteurJeu.Jeu;
 
@@ -33,7 +34,8 @@ public class LabyJeu implements Jeu {
         etreFini();
         if (etreFini()&&!fin) {
             fin = true;
-            System.out.println("Fin du jeu");
+            System.out.println("Game Over");
+            Platform.exit();
         }
     }
 
