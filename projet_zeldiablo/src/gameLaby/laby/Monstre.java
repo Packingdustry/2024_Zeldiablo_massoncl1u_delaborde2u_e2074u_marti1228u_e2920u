@@ -16,6 +16,11 @@ public class Monstre extends Perso {
     }
 
     public int infligerDegat() {
-        return this.degats;
+        if(this.vie>0){
+            return this.degats;
+        }
+        else{
+            return 0;
+        }
     }
 }
