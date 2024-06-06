@@ -19,6 +19,8 @@ class LabyJeu{
 + {static} WIDTH : int
 + {static} HEIGHT : int
 + {static} FICHIER : String
+- labyrinte : Labyrinthe
+- fin : boolean
 + LabyJeu()
 + init() : void
 + update(seconds: double, clavier: Clavier) : void
@@ -27,15 +29,17 @@ class LabyJeu{
 }
 
 class Labyrinthe {
-  + MUR : char
-  + PJ : char
-  + MONSTRE : char
-  + VIDE : char
-  + HAUT : String
-  + BAS  : String
-  + GAUCHE : String
-  + DROITE : String
+  + {static} MUR : char
+  + {static} PJ : char
+  + {static} MONSTRE : char
+  + {static} VIDE : char
+  + {static} BOMBE : char
+  + {static} HAUT : String
+  + {static} BAS  : String
+  + {static} GAUCHE : String
+  + {static} DROITE : String
   + murs : boolean[][]
+  + persos : ArrayList<Perso>
   + Labyrinthe(String)
   + {static} getSuivant(int, int, String) : int[]
   + deplacerPerso(String) : void
@@ -65,6 +69,7 @@ LabyJeu <. LabyDessin:uses
 class Perso {
   - x : int
   - y : int
+  - vie : int
   + Perso(int, int, int)
   + etrePresent(int, int) : boolean
   + getX() : int
