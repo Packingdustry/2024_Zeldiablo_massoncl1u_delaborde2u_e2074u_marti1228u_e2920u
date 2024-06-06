@@ -30,6 +30,15 @@ public class LabyJeu implements Jeu {
         }else if (clavier.haut) {
             labyrinthe.deplacerPerso(Labyrinthe.HAUT);
         }
+        else if(clavier.space){
+            for(int i=1;i<labyrinthe.persos.size();i++){
+                if(labyrinthe.persos.get(i).getX()-1==labyrinthe.persos.get(0).getX() && labyrinthe.persos.get(i).getY()==labyrinthe.persos.get(0).getY()
+                || labyrinthe.persos.get(i).getX()+1==labyrinthe.persos.get(0).getX() && labyrinthe.persos.get(i).getY()==labyrinthe.persos.get(0).getY()
+                ){
+                   labyrinthe.persos.get(i).subirDegats(Perso.degats);
+                }
+            }
+        }
         labyrinthe.verifierMonstre();
         etreFini();
         if (etreFini()&&!fin) {
@@ -45,8 +54,20 @@ public class LabyJeu implements Jeu {
     @Override
     public boolean etreFini() {
         boolean fin = false;
-        if (labyrinthe.persos.get(0).getVie() <= 0)
+        int nbMorts=0;
+        if(labyrinthe.persos.get(0).getVie() <= 0) {
             fin = true;
+        }
+        else{
+            for(int i=1;i<labyrinthe.persos.size();i++){
+                if(labyrinthe.persos.get(i).getVie()<=0){
+                    nbMorts+=1;
+                }
+            }
+        }
+        if(nbMorts==labyrinthe.persos.size()-1){
+            fin = true;
+        }
         return fin;
     }
 

@@ -15,6 +15,8 @@ public class Perso {
      */
     int vie;
 
+    final static int degats = 1;
+
     /**
      * constructeur
      *
@@ -61,5 +63,14 @@ public class Perso {
 
     public int getVie(){
         return this.vie;
+    }
+    public int Attaquer(){
+        return this.degats;
+    }
+
+    public void subirDegats(int dgs){
+        if(this.vie>0){
+            this.vie-=dgs;
+        }
     }
 }
