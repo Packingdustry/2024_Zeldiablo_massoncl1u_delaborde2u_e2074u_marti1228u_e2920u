@@ -39,6 +39,8 @@ public class LabyJeu implements Jeu {
             for(int i=1;i<labyrinthe.persos.size();i++){
                 if(labyrinthe.persos.get(i).getX()-1==labyrinthe.persos.get(0).getX() && labyrinthe.persos.get(i).getY()==labyrinthe.persos.get(0).getY()
                 || labyrinthe.persos.get(i).getX()+1==labyrinthe.persos.get(0).getX() && labyrinthe.persos.get(i).getY()==labyrinthe.persos.get(0).getY()
+                        || labyrinthe.persos.get(i).getX()==labyrinthe.persos.get(0).getX() && labyrinthe.persos.get(i).getY()-1==labyrinthe.persos.get(0).getY()
+                        || labyrinthe.persos.get(i).getX()==labyrinthe.persos.get(0).getX() && labyrinthe.persos.get(i).getY()+1==labyrinthe.persos.get(0).getY()
                 ){
                    labyrinthe.persos.get(i).subirDegats(Perso.degats);
                 }
