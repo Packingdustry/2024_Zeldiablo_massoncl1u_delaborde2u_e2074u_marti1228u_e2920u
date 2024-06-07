@@ -1,0 +1,57 @@
+@startuml
+title deplacer à Gauche
+participant "main" as m
+participant "laby : Labyrinthe" as l
+participant "pj : Perso" as p
+participant Math
+participant Monstre
+create l
+m -> l : new
+create p
+l -> p : new
+m -> l : deplacerPerso(Labyrinthe.GAUCHE)
+activate l
+  l -> p : getX()
+  activate p
+    l <-- p : x : int
+  deactivate p
+  l -> p : getY()
+  activate p
+    l <-- p : y : int
+  deactivate p
+  l -> l : getSuivant(x, y, Labyrinthe.GAUCHE)
+  activate l
+    l <-- l : coordonnes : int[]
+  deactivate l
+  l -> l : deplacerMonstres()
+  activate l
+    loop
+        l -> Math : random()
+        activate Math
+        return direction : double
+        deactivate
+
+          l -> Monstre : getX()
+          activate Monstre
+            l <-- Monstre : x : int
+          deactivate Monstre
+          l -> Monstre : getY()
+          activate Monstre
+            l <-- Monstre : y : int
+          deactivate Monstre
+        alt direction < 0.25
+          l -> l : getSuivant(Labyrinthe.HAUT)
+        else 0.25 <= direction < 0.5
+          l -> l : getSuivant(Labyrinthe.DROITE)
+        else 0.5 <= direction > 0.75
+          l -> l : getSuivant(Labyrinthe.BAS)
+        else direction > 0.75
+          l -> l : getSuivant(Labyrinthe.GAUCHE)
+        end
+    end
+
+  deactivate l
+  deactivate l
+m <-- l
+deactivate l
+@enduml

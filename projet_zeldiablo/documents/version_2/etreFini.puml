@@ -2,7 +2,7 @@
 title Fin du jeu
 actor joueur as j
 participant LabyJeu as ljeu
-participant "segment: Segment" as laby
+participant "laby: Labyrinthe" as laby
 participant "pj : Joueur" as pj
 participant "p : Perso" as p
 collections ArrayList as al
