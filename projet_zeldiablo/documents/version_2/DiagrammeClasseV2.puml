@@ -1,0 +1,97 @@
+@startuml
+package moteurJeu {
+
+interface Jeu{
++ init()
++ update(seconds: double, clavier: Clavier)
++ etreFini(): boolean
+}
+
+
+interface DessinJeu {
++ dessinerJeu(jeu: Jeu, canvas: Canvas)
+}
+}
+
+package gameLaby{
+
+class LabyJeu{
++ {static} WIDTH : int
++ {static} HEIGHT : int
++ {static} FICHIER : String
+- labyrinte : Labyrinthe
+- fin : boolean
++ LabyJeu()
++ init() : void
++ update(seconds: double, clavier: Clavier) : void
++ etreFini(): boolean
++ getLabyrinthe() : Labyrinthe
+}
+
+class Labyrinthe {
+  + {static} MUR : char
+  + {static} PJ : char
+  + {static} MONSTRE : char
+  + {static} VIDE : char
+  + {static} BOMBE : char
+  + {static} HAUT : String
+  + {static} BAS  : String
+  + {static} GAUCHE : String
+  + {static} DROITE : String
+  + murs : boolean[][]
+  + persos : ArrayList<Perso>
+  + Labyrinthe(String)
+  + {static} getSuivant(int, int, String) : int[]
+  + deplacerPerso(String) : void
+  + etreFini() : boolean
+  + getLengthY() : int
+  + getLength() : int
+  + getMur(int, int) : boolean
+  + getMonstre(int, int) : Monstre
+  + verifierMonstre()
+  + getPerso(int, int) : Perso
+}
+
+
+Jeu <|.. LabyJeu
+
+
+LabyJeu "1" --> "1" Labyrinthe : -labyrinthe
+
+
+class LabyDessin{
++ dessinerJeu(jeu: Jeu, canvas: Canvas)
+}
+
+DessinJeu <|.. LabyDessin
+LabyJeu <. LabyDessin:uses
+
+class Perso {
+  - x : int
+  - y : int
+  - vie : int
+  + Perso(int, int, int)
+  + etrePresent(int, int) : boolean
+  + getX() : int
+  + getY() : int
+  + getVie() : int
+  + subirDegats(int)
+}
+
+class Joueur extends Perso{
+  + Joueur(int, int, int)
+}
+
+class Monstre extends Perso {
+  - degats : int
+  + Monstre(int, int, int, int)
+  + infligerDegat() : int
+}
+class Bombe extends Perso {
+  + Bombe(int, int, int)
+  + mettreDegat(Perso p)
+  + explose()
+}
+Labyrinthe "*" -> "*" Perso : + pj
+}
+@enduml
