@@ -1,0 +1,24 @@
+@startuml
+title méthode monstre subit des dégats
+actor Joueur
+participant Labyrinthe
+participant Monstre
+
+Joueur -> Labyrinthe: deplacerPerso(action)
+activate Labyrinthe
+Labyrinthe --> Joueur: void
+deactivate Labyrinthe
+
+Joueur -> Labyrinthe: verifierMonstre()
+activate Labyrinthe
+Labyrinthe -> Monstre: getMonstre(x, y)
+activate Monstre
+alt Monstre trouvé à côté du joueur
+    Labyrinthe -> Monstre: monstre.subirDegats(Perso.degats)
+    Monstre --> Labyrinthe: void
+else Aucun monstre trouvé
+    Labyrinthe --> Joueur: null
+end
+deactivate Monstre
+deactivate Labyrinthe
+@enduml
