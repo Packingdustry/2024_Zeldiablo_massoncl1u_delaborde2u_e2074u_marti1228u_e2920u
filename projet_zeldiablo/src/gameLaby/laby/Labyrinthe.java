@@ -157,6 +157,7 @@ public class Labyrinthe {
 
         // si c'est pas un mur, on effectue le deplacement
         majPos(0, suivante);
+        ((Joueur)this.persos.get(0)).reinitialiserAttaque();
         deplacerMonstres();
     }
 
@@ -206,12 +207,13 @@ public class Labyrinthe {
     public void verifierMonstre() {
         int x = persos.get(0).getX();
         int y = persos.get(0).getY();
-        if (getMonstre(x, y) != null && !(getMonstre(x, y) instanceof Bombe)) {
-            Joueur j = (Joueur) persos.get(0);
+        Joueur j = (Joueur) persos.get(0);
+        if (getMonstre(x, y) != null && !(getMonstre(x, y) instanceof Bombe)&& !j.getAttaqueEnCours()){
             Monstre m = (Monstre) getMonstre(x, y);
             j.subirDegats(m.infligerDegat());
+            j.reinitialiserAttaque();
+            j.setAttaqueEnCours();
         } else if (getMonstre(x, y) != null && (getMonstre(x, y) instanceof Bombe)) {
-            Joueur j = (Joueur) persos.get(0);
             Bombe b = (Bombe) getMonstre(x, y);
             b.explosion(j,this);
         }
