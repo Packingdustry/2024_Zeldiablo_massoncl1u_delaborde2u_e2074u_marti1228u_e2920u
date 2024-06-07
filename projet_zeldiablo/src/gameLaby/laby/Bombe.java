@@ -45,6 +45,6 @@ public class Bombe extends Perso{
                 mettredgt(p, labyrinthe);
             }
         };
-        timer.schedule(task, 1000);
+        timer.schedule(task, 500);
     }
 }
