@@ -15,7 +15,7 @@ public class Perso {
      */
     int vie;
 
-    final static int degats = 1;
+    final static int degats = 5;
 
     /**
      * constructeur
