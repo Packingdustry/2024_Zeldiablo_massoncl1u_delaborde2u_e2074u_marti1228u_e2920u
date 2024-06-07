@@ -64,9 +64,6 @@ public class Perso {
     public int getVie(){
         return this.vie;
     }
-    public int Attaquer(){
-        return this.degats;
-    }
 
     public void subirDegats(int dgs){
         if(this.vie>0){
