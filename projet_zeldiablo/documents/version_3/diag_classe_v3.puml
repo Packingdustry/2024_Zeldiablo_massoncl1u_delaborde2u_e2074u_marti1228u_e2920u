@@ -47,6 +47,8 @@ class Labyrinthe {
   + getMonstre(int, int) : Monstre
   + verifierMonstre()
   + getPerso(int, int) : Perso
+  + deplacerMonstres()
+  + majPos(int, int[])
 }
 
 
