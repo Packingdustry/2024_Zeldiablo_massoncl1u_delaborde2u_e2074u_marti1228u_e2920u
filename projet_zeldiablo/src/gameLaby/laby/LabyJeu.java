@@ -45,7 +45,6 @@ public class LabyJeu implements Jeu {
             }
         }
         labyrinthe.verifierMonstre();
-        etreFini();
         if (etreFini()) {
             System.out.println("Game Over");
             Platform.exit();

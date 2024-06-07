@@ -1,0 +1,48 @@
+@startuml
+title Fin du jeu
+actor joueur as j
+participant LabyJeu as ljeu
+participant "laby: Labyrinthe" as laby
+participant "pj : Joueur" as pj
+participant "p : Perso" as p
+collections ArrayList as al
+j -> ljeu : etreFini()
+activate ljeu
+    ljeu -> al : get(0)
+    activate al
+        ljeu <-- al : pj : Joueur
+    deactivate al
+        ljeu -> pj : getVie()
+    activate pj
+        ljeu <-- pj : vie : int
+    deactivate pj
+    alt vie >= 0
+        return true
+    else
+        loop i (1 -> persos.size())
+            ljeu -> al : get(i)
+            activate al
+                return p : Perso
+            deactivate al
+            ljeu -> p : getVie()
+            activate p
+                return vie : int
+            deactivate p
+            alt vie >= 0
+                ljeu -> al : remove(i)
+                activate al
+                    ljeu <-- al
+                deactivate al
+            end
+        end
+    end
+    ljeu -> laby : getNbMonstres
+    activate laby
+        return nbMonstres : int
+    deactivate laby
+    alt nbMorts < nbMonstres
+    j <-- ljeu : true
+    end
+    j <-- ljeu : false
+deactivate ljeu
+@enduml
