@@ -54,18 +54,18 @@ public class LabyJeu implements Jeu {
     @Override
     public boolean etreFini() {
         boolean fin = false;
-        int nbMorts=0;
+        int nbMorts = 0;
         if(labyrinthe.persos.get(0).getVie() <= 0) {
             fin = true;
         }
         else{
             for(int i=1;i<labyrinthe.persos.size();i++){
                 if(labyrinthe.persos.get(i).getVie()<=0){
-                    nbMorts+=1;
+                    labyrinthe.persos.remove(i);
                 }
             }
         }
-        if(nbMorts==labyrinthe.persos.size()-1){
+        if(nbMorts==labyrinthe.getNbMonstres()){
             fin = true;
         }
         return fin;

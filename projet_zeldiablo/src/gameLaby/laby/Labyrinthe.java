@@ -237,4 +237,14 @@ public class Labyrinthe {
         }
         return null;
     }
+
+    public int getNbMonstres() {
+        int nbMonstres = 0;
+        for (Perso p : persos) {
+            if (p instanceof Monstre) {
+                nbMonstres++;
+            }
+        }
+        return nbMonstres;
+    }
 }
