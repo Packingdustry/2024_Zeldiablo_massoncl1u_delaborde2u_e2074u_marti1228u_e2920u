@@ -156,11 +156,8 @@ public class Labyrinthe {
         int[] suivante = getSuivant(courante[0], courante[1], action);
 
         // si c'est pas un mur, on effectue le deplacement
-        if (!this.murs[suivante[0]][suivante[1]]) {
-            // on met a jour personnage
-            this.persos.get(0).x = suivante[0];
-            this.persos.get(0).y = suivante[1];
-        }
+        majPos(0, suivante);
+        deplacerMonstres();
     }
 
 
@@ -246,5 +243,35 @@ public class Labyrinthe {
             }
         }
         return nbMonstres;
+    }
+
+    public void deplacerMonstres() {
+        for (int i = 1; i < persos.size(); i++) {
+            if (persos.get(i) instanceof Monstre) {
+                Monstre m = (Monstre) persos.get(i);
+                double direction = Math.random();
+                int x = m.getX();
+                int y = m.getY();
+                int[] suivante = new int[2];
+                if (direction < 0.25) {
+                    suivante = getSuivant(x, y, Labyrinthe.HAUT);
+                } else if (direction >= 0.25 && direction < 0.5) {
+                    suivante = getSuivant(x, y, Labyrinthe.DROITE);
+                } else if (direction >= 0.5 && direction < 0.75) {
+                    suivante = getSuivant(x, y, Labyrinthe.BAS);
+                } else {
+                    suivante = getSuivant(x, y, Labyrinthe.GAUCHE);
+                }
+                majPos(i, suivante);
+            }
+        }
+    }
+
+    public void majPos(int i, int[] suivante) {
+        if (!this.murs[suivante[0]][suivante[1]]) {
+            // on met a jour personnage
+            this.persos.get(i).x = suivante[0];
+            this.persos.get(i).y = suivante[1];
+        }
     }
 }
