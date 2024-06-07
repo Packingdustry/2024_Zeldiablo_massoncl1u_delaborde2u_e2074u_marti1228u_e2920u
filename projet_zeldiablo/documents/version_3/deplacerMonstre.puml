@@ -23,9 +23,10 @@ activate l
   activate l
     l <-- l : coordonnes : int[]
   deactivate l
+  l -> l : majPos(0, coordonnes)
   l -> l : deplacerMonstres()
   activate l
-    loop
+    loop i (1 -> persos.size())
         l -> Math : random()
         activate Math
         return direction : double
@@ -41,15 +42,27 @@ activate l
           deactivate Monstre
         alt direction < 0.25
           l -> l : getSuivant(Labyrinthe.HAUT)
+          activate l
+            l <-- l : coordonnes : int[]
+          deactivate l
         else 0.25 <= direction < 0.5
           l -> l : getSuivant(Labyrinthe.DROITE)
+          activate l
+            l <-- l : coordonnes : int[]
+          deactivate l
         else 0.5 <= direction > 0.75
           l -> l : getSuivant(Labyrinthe.BAS)
+          activate l
+            l <-- l : coordonnes : int[]
+          deactivate l
         else direction > 0.75
-          l -> l : getSuivant(Labyrinthe.GAUCHE)
+          l -> l : getSuivant(x, y, Labyrinthe.GAUCHE)
+            activate l
+              l <-- l : coordonnes : int[]
+            deactivate l
         end
+        l -> l : majPos(i, coordonnes)
     end
-
   deactivate l
   deactivate l
 m <-- l
