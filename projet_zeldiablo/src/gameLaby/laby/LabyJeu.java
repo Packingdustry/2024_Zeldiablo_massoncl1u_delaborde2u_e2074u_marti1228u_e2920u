@@ -13,7 +13,8 @@ public class LabyJeu implements Jeu {
     public static final String FICHIER = "labySimple/laby2.txt";
 
     private final Labyrinthe labyrinthe;
-    private boolean fin = false;
+
+    private boolean finMonstre = false;
 
     public LabyJeu() throws IOException {
         labyrinthe = new Labyrinthe(FICHIER);
@@ -45,9 +46,11 @@ public class LabyJeu implements Jeu {
         }
         labyrinthe.verifierMonstre();
         etreFini();
-        if (etreFini()&&!fin) {
-            fin = true;
+        if (etreFini()) {
             System.out.println("Game Over");
+            Platform.exit();
+        }else if (finMonstre) {
+            System.out.println("bien joué");
             Platform.exit();
         }
     }
@@ -70,7 +73,7 @@ public class LabyJeu implements Jeu {
             }
         }
         if(nbMorts==labyrinthe.getNbMonstres()){
-            fin = true;
+            finMonstre = true;
         }
         return fin;
     }
