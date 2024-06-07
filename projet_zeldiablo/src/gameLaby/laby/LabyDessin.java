@@ -80,6 +80,15 @@ public class LabyDessin implements DessinJeu {
                             (labyJeu.HEIGHT / taille) * x + (labyJeu.HEIGHT / taille) / 2,
                             (labyJeu.WIDTH / tailleY) * y + (labyJeu.WIDTH / tailleY) / 2 );
                 }
+                if (laby.getPerso(x, y) != null && laby.getPerso(x, y) instanceof Bombe) {
+                    gc.setFill(Color.PURPLE);
+                    gc.fillOval(
+                            (labyJeu.HEIGHT / taille) * x,
+                            (labyJeu.WIDTH / tailleY) * y,
+                            labyJeu.HEIGHT / taille,
+                            labyJeu.WIDTH / tailleY
+                    );
+                }
             }
         }
     }

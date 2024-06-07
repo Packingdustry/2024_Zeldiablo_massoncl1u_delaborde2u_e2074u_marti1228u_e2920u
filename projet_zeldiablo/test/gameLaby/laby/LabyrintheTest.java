@@ -70,11 +70,12 @@ class LabyrintheTest {
     }
 
     @Test
-    void testMettreDegats(){
+    void testMettreDegats() throws IOException {
+        Labyrinthe l = new Labyrinthe("laby0.txt");
         Bombe b = new Bombe(2,2,20);
         Perso principal = new Perso(3,3,50);
         assertEquals(50,principal.getVie(),"Cela doit renvoyer 50 pvs");
-        b.mettredgt(principal);
+        b.mettredgt(principal,l);
         assertEquals(30,principal.getVie(),"le perso a subi 20 degats de la bombe, il a donc 30 pv");
     }
 }

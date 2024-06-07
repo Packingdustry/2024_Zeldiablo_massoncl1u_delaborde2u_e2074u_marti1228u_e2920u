@@ -213,10 +213,10 @@ public class Labyrinthe {
             Joueur j = (Joueur) persos.get(0);
             Monstre m = (Monstre) getMonstre(x, y);
             j.subirDegats(m.infligerDegat());
-        } else if (getMonstre(x, y) != null && !(getMonstre(x, y) instanceof Bombe)) {
+        } else if (getMonstre(x, y) != null && (getMonstre(x, y) instanceof Bombe)) {
             Joueur j = (Joueur) persos.get(0);
             Bombe b = (Bombe) getMonstre(x, y);
-            b.explose(this);
+            b.explosion(j,this);
         }
     }
 

@@ -1,4 +1,6 @@
 package gameLaby.laby;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Bombe extends Perso{
     /**
@@ -12,21 +14,37 @@ public class Bombe extends Perso{
         super(dx,dy,dgt);
     }
 
-    public void mettredgt(Perso p){
-        int dgt=this.getVie();
-        p.vie-=dgt;
-    }
-
-   public void explose(Labyrinthe laby){
-        int x = this.getX();
-        int y = this.getY();
-        for(int i=x-1; i<=x+1; i++){
-            for(int j=y-1; j<=j+1; j++){
-              Perso p = laby.getPerso(i,j);
-              if(p!=null){
-                  this.mettredgt(p);
-              }
+    public void mettredgt(Perso p,Labyrinthe labyrinthe) {
+        int dgt = 1;
+        if (this.getX() - 1 == labyrinthe.persos.get(0).getX() && this.getY() == labyrinthe.persos.get(0).getY()
+                || this.getX() + 1 == labyrinthe.persos.get(0).getX() && this.getY() == labyrinthe.persos.get(0).getY()
+                || this.getX() == labyrinthe.persos.get(0).getX() && this.getY() + 1 == labyrinthe.persos.get(0).getY()
+                || this.getX() == labyrinthe.persos.get(0).getX() && this.getY() - 1 == labyrinthe.persos.get(0).getY()
+                || this.getX() == labyrinthe.persos.get(0).getX() && this.getY() == labyrinthe.persos.get(0).getY()
+                || this.getX() == labyrinthe.persos.get(0).getX()-1 && this.getY() - 1 == labyrinthe.persos.get(0).getY()
+                || this.getX() == labyrinthe.persos.get(0).getX()+1 && this.getY() - 1 == labyrinthe.persos.get(0).getY()
+                || this.getX() == labyrinthe.persos.get(0).getX()-1 && this.getY() + 1 == labyrinthe.persos.get(0).getY()
+                || this.getX() == labyrinthe.persos.get(0).getX()+1 && this.getY() + 1 == labyrinthe.persos.get(0).getY()
+        ) {
+            p.subirDegats(dgt);
+        }
+        for(int i=1;i<labyrinthe.persos.size();i++){
+            if(labyrinthe.persos.get(i) instanceof Bombe
+                    &&labyrinthe.persos.get(i).getX()==this.getX()
+                    &&labyrinthe.persos.get(i).getY()==this.getY()
+            ){
+                labyrinthe.persos.remove(i);
             }
         }
+    }
+
+    public void explosion(Perso p, Labyrinthe labyrinthe){
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            public void run() {
+                mettredgt(p, labyrinthe);
+            }
+        };
+        timer.schedule(task, 1000);
     }
 }
