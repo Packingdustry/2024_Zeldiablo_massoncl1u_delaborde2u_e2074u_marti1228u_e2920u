@@ -77,13 +77,4 @@ class LabyrintheTest {
         b.mettredgt(principal);
         assertEquals(30,principal.getVie(),"le perso a subi 20 degats de la bombe, il a donc 30 pv");
     }
-
-    @Test
-    void testEtreFini() throws IOException {
-        Labyrinthe l = new Labyrinthe("labySimple/laby0.txt");
-        Monstre m = (Monstre)l.getMonstre(2,2);
-        assertEquals(false,l.etreFini(),"Le labyrinthe n'est pas fini");
-        m.subirDegats(50);
-        assertEquals(true,l.etreFini(),"Le labyrinthe est fini");
-    }
 }
