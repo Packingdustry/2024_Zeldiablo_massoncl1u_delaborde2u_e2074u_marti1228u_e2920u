@@ -1,0 +1,5 @@
+On doit refractor tous  les classes 
+ - bouger les méthodes dans Monstre Joueur etc.
+ - essayer de séparer la gestion des murs et éléments et le jeu
+
+ - penser autrement les diagrammes de séquence (penser aux notes et si il y a des alt : factoriser)
