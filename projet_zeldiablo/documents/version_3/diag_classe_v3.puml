@@ -2,7 +2,7 @@
 package moteurJeu {
 
 interface Jeu{
-+ init()
++ init() : void
 + update(seconds: double, clavier: Clavier)
 + etreFini(): boolean
 }
@@ -89,7 +89,11 @@ class Bombe extends Perso {
   + explose()
 }
 class Joueur extends Perso{
+  - attaqueEnCours : boolean
   + Joueur(int, int, int)
+  + reinitialiserAttaque() : void
+  + getAttaqueEnCours() : boolean
+  + setAttaqueEnCours() : void
 }
 
 class Item #pink {
