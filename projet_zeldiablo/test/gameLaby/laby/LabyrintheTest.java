@@ -55,10 +55,18 @@ class LabyrintheTest {
     }
 
     @Test
-    void testSubirDegats(){
+    void testSubirDegatsJoueur(){
         Joueur principal = new Joueur(2,3,50);
         principal.subirDegats(32);
         assertEquals(18,principal.getVie(),"le personnage doit avoir 18 pv car il en a perdu 32");
+    }
+
+    @Test
+    void testSubirDegatsMonstre(){
+        Monstre m = new Monstre(5,50,2,3);
+        assertEquals(50,m.getVie(),"le monstre doit avoir 50 pv car il n'en a pas perdu");
+        m.subirDegats(10);
+        assertEquals(40,m.getVie(),"le monstre doit avoir 40 pv car il en a perdu 10");
     }
 
     @Test
@@ -68,5 +76,14 @@ class LabyrintheTest {
         assertEquals(50,principal.getVie(),"Cela doit renvoyer 50 pvs");
         b.mettredgt(principal);
         assertEquals(30,principal.getVie(),"le perso a subi 20 degats de la bombe, il a donc 30 pv");
+    }
+
+    @Test
+    void testEtreFini() throws IOException {
+        Labyrinthe l = new Labyrinthe("labySimple/laby0.txt");
+        Monstre m = (Monstre)l.getMonstre(2,2);
+        assertEquals(false,l.etreFini(),"Le labyrinthe n'est pas fini");
+        m.subirDegats(50);
+        assertEquals(true,l.etreFini(),"Le labyrinthe est fini");
     }
 }
