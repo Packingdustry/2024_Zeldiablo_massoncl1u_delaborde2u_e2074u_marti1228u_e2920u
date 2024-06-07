@@ -23,12 +23,16 @@ public class LabyJeu implements Jeu {
     public void update(double secondes, Clavier clavier) {
         if (clavier.droite) {
             labyrinthe.deplacerPerso(Labyrinthe.DROITE);
+            clavier.droite =false;
         }else if (clavier.gauche) {
             labyrinthe.deplacerPerso(Labyrinthe.GAUCHE);
+            clavier.gauche =false;
         }else if (clavier.bas) {
             labyrinthe.deplacerPerso(Labyrinthe.BAS);
+            clavier.bas =false;
         }else if (clavier.haut) {
             labyrinthe.deplacerPerso(Labyrinthe.HAUT);
+            clavier.haut =false;
         }
         else if(clavier.space){
             for(int i=1;i<labyrinthe.persos.size();i++){
