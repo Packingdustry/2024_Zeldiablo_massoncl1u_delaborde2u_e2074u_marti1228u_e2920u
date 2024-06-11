@@ -18,7 +18,7 @@ class LabyJeu{
 + {static} WIDTH : int
 + {static} HEIGHT : int
 + {static} FICHIER : String
-- fin : boolean
+- finMonstre : boolean
 + LabyJeu()
 + init() : void
 + update(seconds: double, clavier: Clavier) : void
@@ -43,10 +43,6 @@ class Labyrinthe {
   + getLength() : int
   + getMur(int, int) : boolean
   + getMonstre(int, int) : Monstre
-  + verifierMonstre()
-  + getPerso(int, int) : Perso
-  + deplacerMonstres()
-  + majPos(int, int[])
 }
 
 
@@ -63,7 +59,7 @@ class LabyDessin{
 DessinJeu <|.. LabyDessin
 LabyJeu <. LabyDessin:uses
 
-abstract class Entite {
+abstract class Entite #pink {
   + x : int
   + y : int
   getCouleur() : Color
@@ -85,6 +81,8 @@ class Monstre extends Perso {
   - degats : int
   + Monstre(int, int, int, int)
   + infligerDegat() : int
+  + getCouleur() : Color
+  + deplacerMonstre(boolean[][]) : void
 }
 class Bombe extends Entite {
   + Bombe(int, int, int)
@@ -97,7 +95,11 @@ class Joueur extends Perso{
   + reinitialiserAttaque() : void
   + getAttaqueEnCours() : boolean
   + setAttaqueEnCours() : void
-  + deplacerPerso(String) : void
+  + deplacerPerso(String, boolean[][], ArrayList<Monstre>) : void
+  + verifierMonstres(Labyrinthe, ArrayList<Monstre>, Bombe) : void
+  + getCouleur() : Color
+  + getMonstre(int, int, ArrayList<Monstre>) : Monstre
+  + getBombe(int, int, Bombe)
 }
 
 abstract class Item extends Entite {
@@ -106,6 +108,8 @@ abstract class Item extends Entite {
 
 class Bouclier extends Item {
   - vie : int
+  + Bouclier(int, int, int)
+  + getCouleur() : Color
 }
 
 Labyrinthe "*" -> "*" Entite : + entites
