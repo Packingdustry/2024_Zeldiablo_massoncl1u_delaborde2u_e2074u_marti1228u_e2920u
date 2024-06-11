@@ -33,10 +33,18 @@ public class Monstre extends Perso {
         }
     }
 
+    /**
+     * getter
+     * @return la couleur du monstre dans le jeu
+     */
     public Color getCouleur() {
         return Color.RED;
     }
 
+    /**
+     * permet le déplacement aléatoire des monstres à chaque fois que l'on déplace le personnage
+     * @param murs mur du labyrinthe
+     */
     public void deplacerMonstre(boolean[][] murs) {
         double direction = Math.random();
         int[] suivante = new int[2];

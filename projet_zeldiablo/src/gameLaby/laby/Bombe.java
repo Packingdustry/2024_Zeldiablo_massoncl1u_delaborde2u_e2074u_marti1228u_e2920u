@@ -56,6 +56,10 @@ public class Bombe extends Entite {
         timer.schedule(task, 500);
     }
 
+    /**
+     * methode qui permet de recuperer la couleur
+     * @return la couleur de la bombe
+     */
     public Color getCouleur() {
         return Color.VIOLET;
     }
