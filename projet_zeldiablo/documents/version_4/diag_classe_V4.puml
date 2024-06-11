@@ -1,0 +1,121 @@
+@startuml
+package moteurJeu {
+
+interface Jeu{
++ init() : void
++ update(seconds: double, clavier: Clavier)
++ etreFini(): boolean
+}
+
+
+interface DessinJeu {
++ dessinerJeu(jeu: Jeu, canvas: Canvas)
+}
+
+package gameLaby{
+
+class LabyJeu{
++ {static} WIDTH : int
++ {static} HEIGHT : int
++ {static} FICHIER : String
+- finMonstre : boolean
++ LabyJeu()
++ init() : void
++ update(seconds: double, clavier: Clavier) : void
++ etreFini(): boolean
++ getLabyrinthe() : Labyrinthe
+}
+
+class Labyrinthe {
+  + {static} MUR : char
+  + {static} PJ : char
+  + {static} MONSTRE : char
+  + {static} VIDE : char
+  + {static} BOMBE : char
+  + {static} HAUT : String
+  + {static} BAS  : String
+  + {static} GAUCHE : String
+  + {static} DROITE : String
+  + murs : boolean[][]
+  + Labyrinthe(String)
+  + etreFini() : boolean
+  + getLengthY() : int
+  + getLength() : int
+  + getMur(int, int) : boolean
+  + getMonstre(int, int) : Monstre
+}
+
+
+Jeu <|.. LabyJeu
+
+
+LabyJeu "1" --> "1" Labyrinthe : -labyrinthe
+
+
+class LabyDessin{
++ dessinerJeu(jeu: Jeu, canvas: Canvas)
+}
+
+DessinJeu <|.. LabyDessin
+LabyJeu <. LabyDessin:uses
+
+abstract class Entite #pink {
+  + x : int
+  + y : int
+  getCouleur() : Color
+}
+
+abstract class Perso extends Entite {
+  - vie : int
+  + Perso(int, int, int)
+  + etrePresent(int, int) : boolean
+  + getX() : int
+  + getY() : int
+  + getVie() : int
+  + subirDegats(int)
+  + getSuivant(int, int, String) : int[]
+}
+
+
+class Monstre extends Perso {
+  - degats : int
+  + Monstre(int, int, int, int)
+  + infligerDegat() : int
+  + getCouleur() : Color
+  + deplacerMonstre(boolean[][]) : void
+}
+class Bombe extends Entite {
+  + Bombe(int, int, int)
+  + mettreDegat(Perso p)
+  + explose()
+}
+class Joueur extends Perso{
+  - attaqueEnCours : boolean
+  + Joueur(int, int, int)
+  + reinitialiserAttaque() : void
+  + getAttaqueEnCours() : boolean
+  + setAttaqueEnCours() : void
+  + deplacerPerso(String, boolean[][], ArrayList<Monstre>) : void
+  + verifierMonstres(Labyrinthe, ArrayList<Monstre>, Bombe) : void
+  + getCouleur() : Color
+  + getMonstre(int, int, ArrayList<Monstre>) : Monstre
+  + getBombe(int, int, Bombe)
+}
+
+abstract class Item extends Entite {
+  - DansInventaire : boolean
+}
+
+class Bouclier extends Item {
+  - vie : int
+  + Bouclier(int, int, int)
+  + getCouleur() : Color
+}
+
+Labyrinthe "*" -> "*" Entite : + entites
+Labyrinthe "*" -> "*" Monstre : + monstres
+Labyrinthe "*" -> "1" Joueur : + pj
+Labyrinthe "*" -> "1" Bouclier : + bouclier
+Labyrinthe "*" -> "*" Bombe : + bombes
+}
+@enduml
