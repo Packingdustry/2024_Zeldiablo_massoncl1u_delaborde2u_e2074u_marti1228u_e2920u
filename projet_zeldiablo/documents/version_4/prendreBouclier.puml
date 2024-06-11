@@ -1,5 +1,5 @@
 @startuml
-title méthode prendre bouclier
+title méthode prendreBouclier
 actor Joueur
 participant Labyrinthe
 participant Bouclier
