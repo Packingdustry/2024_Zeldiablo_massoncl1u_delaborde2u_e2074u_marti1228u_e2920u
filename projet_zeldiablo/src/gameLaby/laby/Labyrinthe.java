@@ -22,6 +22,7 @@ public class Labyrinthe {
     public static final char PJ = 'P';
     public static final char VIDE = '.';
     public static final char BOMBE = 'B';
+    public static final char BOUCLIER = 'S';
 
     /**
      * constantes actions possibles
@@ -108,6 +109,11 @@ public class Labyrinthe {
                         this.bombes.add(b);
                         this.entites.add(b);
                         break;
+                    case BOUCLIER:
+                        this.murs[colonne][numeroLigne] = false;
+                        this.bouclier = new Bouclier(colonne,numeroLigne,20);
+                        this.entites.add(bouclier);
+                        break;
                     default:
                         throw new Error("caractere inconnu " + c);
                 }
@@ -185,5 +191,12 @@ public class Labyrinthe {
             }
         }
         pj.verifierMonstre(this, monstres, bombes);
+        this.prendreBouclier(pj.getX(),pj.getY());
+    }
+    public void prendreBouclier(int x,int y) {
+        if (this.bouclier.getX() == pj.getX() & this.bouclier.getY() == pj.getY()) {
+            pj.bouclier = this.bouclier;
+            this.entites.remove(bouclier);
+        }
     }
 }

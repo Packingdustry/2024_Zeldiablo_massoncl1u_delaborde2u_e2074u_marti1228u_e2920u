@@ -35,7 +35,15 @@ public class Bombe extends Entite {
                 || this.getX() == labyrinthe.pj.getX()-1 && this.getY() + 1 == labyrinthe.pj.getY()
                 || this.getX() == labyrinthe.pj.getX()+1 && this.getY() + 1 == labyrinthe.pj.getY()
         ) {
-            p.subirDegats(dgt);
+            if(p.bouclier!=null){
+                p.bouclier.subirDegats(dgt);
+                if(p.bouclier.vie<=0){
+                    p.bouclier=null;
+                }
+            }
+            else{
+                p.subirDegats(dgt);
+            }
         }
         labyrinthe.bombes.remove(this);
         labyrinthe.entites.remove(this);

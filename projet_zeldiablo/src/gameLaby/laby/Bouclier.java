@@ -12,6 +12,10 @@ public class Bouclier extends Item {
         this. vie = v;
     }
 
+    public void subirDegats(int dgt){
+        this.vie-=dgt;
+    }
+
     @Override
     public Color getCouleur() {
         return Color.GREEN;

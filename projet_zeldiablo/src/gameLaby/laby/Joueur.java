@@ -9,6 +9,7 @@ public class Joueur extends Perso{
      * permet de verifier si un monstre a deja attaqué le joueur ou non
      */
     private boolean attaqueEnCours;
+    private Color color;
     /**
      * constructeur
      *
@@ -38,7 +39,13 @@ public class Joueur extends Perso{
     }
 
     public Color getCouleur() {
-        return Color.BLUE;
+        if(this.bouclier!=null){
+            this.color=Color.ORANGE;
+        }
+        else{
+            this.color=Color.BLUE;
+        }
+        return this.color;
     }
 
 
@@ -67,7 +74,15 @@ public class Joueur extends Perso{
     public void verifierMonstre(Labyrinthe laby, ArrayList<Monstre> monstres, ArrayList<Bombe> bombes) {
         if (getMonstre(x, y, monstres) != null && !getAttaqueEnCours()) {
             Monstre m = getMonstre(x, y, monstres);
-            subirDegats(m.infligerDegat());
+            if(this.bouclier!=null){
+                this.bouclier.subirDegats(m.infligerDegat());
+                if(this.bouclier.vie<=0){
+                    this.bouclier=null;
+                }
+            }
+            else{
+                subirDegats(m.infligerDegat());
+            }
             reinitialiserAttaque();
             setAttaqueEnCours();
         } else if (getBombe(x, y, bombes) != null && !getAttaqueEnCours()) {
@@ -92,4 +107,4 @@ public class Joueur extends Perso{
         }
         return null;
     }
-}
+    }

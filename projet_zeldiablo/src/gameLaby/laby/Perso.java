@@ -12,6 +12,7 @@ public abstract class Perso extends Entite{
     int vie;
 
     final static int degats = 1;
+    Bouclier bouclier;
 
     /**
      * constructeur
