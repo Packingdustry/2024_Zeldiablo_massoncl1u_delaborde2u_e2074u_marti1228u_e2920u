@@ -1,6 +1,9 @@
 package gameLaby.laby;
 
 public class Monstre extends Perso {
+    /**
+     * indique les degats que met un monstre
+     */
     private int degats;
 
     /**
@@ -15,6 +18,10 @@ public class Monstre extends Perso {
         this.degats = degats;
     }
 
+    /**
+     * permet d'infliger des degats si la cible a des pv superieurs a 0
+     * @return degats infliges
+     */
     public int infligerDegat() {
         if(this.vie>0){
             return this.degats;

@@ -61,10 +61,18 @@ public class Perso {
         return this.y;
     }
 
+    /**
+     *
+     * @return vie du personnage
+     */
     public int getVie(){
         return this.vie;
     }
 
+    /**
+     * permet a un perso de subir des degats si ses pvs sont superieurs a 0
+     * @param dgs degats infliges au personnage
+     */
     public void subirDegats(int dgs){
         if(this.vie>0){
             this.vie-=dgs;

@@ -13,6 +13,11 @@ import moteurJeu.Jeu;
 
 public class LabyDessin implements DessinJeu {
 
+    /**
+     * permet de dessiner le jeu a tout moment
+     * @param jeu jeu a afficher
+     * @param canvas canvas dans lequel dessiner l'etat du jeu
+     */
     @Override
     public void dessinerJeu(Jeu jeu, Canvas canvas) {
         LabyJeu labyJeu = (LabyJeu) jeu;

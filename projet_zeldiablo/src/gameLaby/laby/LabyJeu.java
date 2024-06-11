@@ -20,6 +20,11 @@ public class LabyJeu implements Jeu {
         labyrinthe = new Labyrinthe(FICHIER);
     }
 
+    /**
+     * met a jour le labyrinthe avec les nouvelles positions du joueur, des bombes, des monstres
+     * @param secondes temps ecoule depuis la derniere mise a jour
+     * @param clavier objet contenant l'état du clavier'
+     */
     @Override
     public void update(double secondes, Clavier clavier) {
         if (clavier.droite) {
@@ -59,6 +64,10 @@ public class LabyJeu implements Jeu {
     @Override
     public void init() {}
 
+    /**
+     * verifier si le labyrinthe est fini
+     * @return booleen indiquant si le labyrinthe est fini
+     */
     @Override
     public boolean etreFini() {
         boolean fin = false;

@@ -14,6 +14,11 @@ public class Bombe extends Perso{
         super(dx,dy,dgt);
     }
 
+    /**
+     * permet a une bombe de mettre des degats autour de la case ou elle explose
+     * @param p personnage du labyrinthe
+     * @param labyrinthe labyrinthe dans lequel la bombe va exploser
+     */
     public void mettredgt(Perso p,Labyrinthe labyrinthe) {
         int dgt = 1;
         if (this.getX() - 1 == labyrinthe.persos.get(0).getX() && this.getY() == labyrinthe.persos.get(0).getY()
@@ -38,6 +43,11 @@ public class Bombe extends Perso{
         }
     }
 
+    /**
+     * permet a une bombe de exploser au bout d'un certain temps
+     * @param p personnage du labyrinthe
+     * @param labyrinthe labyrinthe ou la bombe explose
+     */
     public void explosion(Perso p, Labyrinthe labyrinthe){
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {

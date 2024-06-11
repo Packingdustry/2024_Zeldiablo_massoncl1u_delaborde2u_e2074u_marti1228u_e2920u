@@ -204,6 +204,9 @@ public class Labyrinthe {
         return this.murs[x][y];
     }
 
+    /**
+     *
+     */
     public void verifierMonstre() {
         int x = persos.get(0).getX();
         int y = persos.get(0).getY();
@@ -219,6 +222,12 @@ public class Labyrinthe {
         }
     }
 
+    /**
+     * renvoie le perso si il se trouve a la position x,y
+     * @param x: position x du perso
+     * @param y: position y du perso
+     * @return
+     */
     public Perso getPerso(int x, int y) {
         for (Perso perso : persos) {
             if (perso.getX() == x && perso.getY() == y) {
@@ -228,6 +237,12 @@ public class Labyrinthe {
         return null;
     }
 
+    /**
+     * verifie si il y a un monstre a la position x,y
+     * @param x: position x du monstre
+     * @param y: position y du monstre
+     * @return
+     */
     public Perso getMonstre(int x, int y) {
         for (int i = 1; i < persos.size(); i++) {
             if (persos.get(i).getX() == x && persos.get(i).getY() == y) {
@@ -237,6 +252,10 @@ public class Labyrinthe {
         return null;
     }
 
+    /**
+     * renvoie le nombre de monstres
+     * @return int representant le nb de monstres
+     */
     public int getNbMonstres() {
         int nbMonstres = 0;
         for (Perso p : persos) {
@@ -247,6 +266,9 @@ public class Labyrinthe {
         return nbMonstres;
     }
 
+    /**
+     * permet de deplacer les monstres aleatoirement a chaque deplacement
+     */
     public void deplacerMonstres() {
         for (int i = 1; i < persos.size(); i++) {
             if (persos.get(i) instanceof Monstre) {
@@ -269,6 +291,11 @@ public class Labyrinthe {
         }
     }
 
+    /**
+     * met a jour la position des persos
+     * @param i
+     * @param suivante
+     */
     public void majPos(int i, int[] suivante) {
         if (!this.murs[suivante[0]][suivante[1]]) {
             // on met a jour personnage
