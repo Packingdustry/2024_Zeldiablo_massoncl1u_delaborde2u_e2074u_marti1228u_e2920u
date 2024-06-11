@@ -5,8 +5,8 @@ import java.io.IOException;
 
 public class MainLaby {
     public static void main(String[] args) throws IOException {
-        int width = 800;
-        int height = 600;
+        int width = 1200;
+        int height = 900;
         int pFPS = 100;
 
         // creation des objets
