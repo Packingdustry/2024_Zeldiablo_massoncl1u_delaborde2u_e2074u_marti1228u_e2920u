@@ -1,5 +1,7 @@
 package gameLaby.laby;
 
+import moteurJeu.Clavier;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -64,7 +66,9 @@ public class Labyrinthe {
 
         // creation labyrinthe vide
         this.murs = new boolean[nbColonnes][nbLignes];
-        this.monstres = new ArrayList<Monstre>();
+        this.entites = new Entite[nbColonnes][nbLignes];
+        this.monstres = new ArrayList<>();
+        this.bombes = new ArrayList<>();
 
         // lecture des cases
         String ligne = bfRead.readLine();
@@ -81,23 +85,30 @@ public class Labyrinthe {
                 switch (c) {
                     case MUR:
                         this.murs[colonne][numeroLigne] = true;
+                        this.entites[colonne][numeroLigne] = null;
                         break;
                     case VIDE:
                         this.murs[colonne][numeroLigne] = false;
+                        this.entites[colonne][numeroLigne] = null;
                         break;
                     case PJ:
                         // pas de mur
                         this.murs[colonne][numeroLigne] = false;
                         // ajoute PJ
                         this.pj = new Joueur(colonne, numeroLigne, 100);
+                        this.entites[colonne][numeroLigne] = pj;
                         break;
                     case MONSTRE:
                         this.murs[colonne][numeroLigne] = false;
-                        this.monstres.add(new Monstre(10, 50, colonne, numeroLigne));
+                        Monstre m = new Monstre(10, 50, colonne, numeroLigne);
+                        this.monstres.add(m);
+                        this.entites[colonne][numeroLigne] = m;
                         break;
                     case BOMBE:
                         this.murs[colonne][numeroLigne] = false;
-                        this.bombes.add(new Bombe(colonne, numeroLigne, 10));
+                        Bombe b = new Bombe(colonne, numeroLigne, 10);
+                        this.bombes.add(b);
+                        this.entites[colonne][numeroLigne] = b;
                         break;
                     default:
                         throw new Error("caractere inconnu " + c);
@@ -147,12 +158,34 @@ public class Labyrinthe {
     }
 
     public int getNbMonstres() {
-        int nbMonstres = 0;
-        for (Perso p : persos) {
-            if (p instanceof Monstre) {
-                nbMonstres++;
+        return monstres.size();
+    }
+
+    public void actualiser(Clavier clavier) {
+        if (clavier.droite) {
+            pj.deplacerPerso(Labyrinthe.DROITE, murs, monstres);
+            clavier.droite =false;
+        }else if (clavier.gauche) {
+            pj.deplacerPerso(Labyrinthe.GAUCHE, murs, monstres);
+            clavier.gauche =false;
+        }else if (clavier.bas) {
+            pj.deplacerPerso(Labyrinthe.BAS, murs, monstres);
+            clavier.bas =false;
+        }else if (clavier.haut) {
+            pj.deplacerPerso(Labyrinthe.HAUT, murs, monstres);
+            clavier.haut =false;
+        }
+        else if(clavier.space){
+            for(Monstre m : monstres){
+                if(m.getX()-1==pj.getX() && m.getY()==pj.getY()
+                        || m.getX()+1==pj.getX() && m.getY()==pj.getY()
+                        || m.getX()==pj.getX() && m.getY()-1==pj.getY()
+                        || m.getX()==pj.getX() && m.getY()+1==pj.getY()
+                ){
+                    m.subirDegats(Perso.degats);
+                }
             }
         }
-        return nbMonstres;
+        pj.verifierMonstre(this, monstres, bombes);
     }
 }

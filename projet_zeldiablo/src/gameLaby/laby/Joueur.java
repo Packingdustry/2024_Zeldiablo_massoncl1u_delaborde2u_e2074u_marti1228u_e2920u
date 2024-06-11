@@ -46,21 +46,23 @@ public class Joueur extends Perso{
         int[] suivante = getSuivant(courante[0], courante[1], action);
 
         // si c'est pas un mur, on effectue le deplacement
-        majPos(suivante, murs);
+        System.out.println("x : " + x + "\ny : " + y);
+        this.majPos(suivante, murs);
+        System.out.println("x : " + x + "\ny : " + y);
         reinitialiserAttaque();
         for (Monstre m : monstres) {
             m.deplacerMonstre(murs);
         }
     }
 
-    public void verifierMonstre(Labyrinthe laby, ArrayList<Monstre> monstres, Bombe bombe) {
-        if (getMonstre(x, y, monstres) != null && !getAttaqueEnCours()){
+    public void verifierMonstre(Labyrinthe laby, ArrayList<Monstre> monstres, ArrayList<Bombe> bombes) {
+        if (getMonstre(x, y, monstres) != null && !getAttaqueEnCours()) {
             Monstre m = getMonstre(x, y, monstres);
             subirDegats(m.infligerDegat());
             reinitialiserAttaque();
             setAttaqueEnCours();
-        } else if (getBombe(x, y, bombe) && !getAttaqueEnCours()) {
-            bombe.explosion(this, laby);
+        } else if (getBombe(x, y, bombes) != null && !getAttaqueEnCours()) {
+            getBombe(x, y, bombes).explosion(this, laby);
         }
     }
 
@@ -73,10 +75,12 @@ public class Joueur extends Perso{
         return null;
     }
 
-    public boolean getBombe(int x, int y, Bombe bombe) {
-        if (bombe.getX() == x && bombe.getY() == y) {
-            return true;
+    public Bombe getBombe(int x, int y, ArrayList<Bombe> bombes) {
+        for (Bombe bombe : bombes) {
+            if (bombe.getX() == x && bombe.getY() == y) {
+                return bombe;
+            }
         }
-        return false;
+        return null;
     }
 }

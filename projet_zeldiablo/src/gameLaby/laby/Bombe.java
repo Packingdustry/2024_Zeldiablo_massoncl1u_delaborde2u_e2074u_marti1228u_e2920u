@@ -20,24 +20,23 @@ public class Bombe extends Entite {
 
     public void mettredgt(Perso p,Labyrinthe labyrinthe) {
         int dgt = 1;
-        if (this.getX() - 1 == labyrinthe.persos.get(0).getX() && this.getY() == labyrinthe.persos.get(0).getY()
-                || this.getX() + 1 == labyrinthe.persos.get(0).getX() && this.getY() == labyrinthe.persos.get(0).getY()
-                || this.getX() == labyrinthe.persos.get(0).getX() && this.getY() + 1 == labyrinthe.persos.get(0).getY()
-                || this.getX() == labyrinthe.persos.get(0).getX() && this.getY() - 1 == labyrinthe.persos.get(0).getY()
-                || this.getX() == labyrinthe.persos.get(0).getX() && this.getY() == labyrinthe.persos.get(0).getY()
-                || this.getX() == labyrinthe.persos.get(0).getX()-1 && this.getY() - 1 == labyrinthe.persos.get(0).getY()
-                || this.getX() == labyrinthe.persos.get(0).getX()+1 && this.getY() - 1 == labyrinthe.persos.get(0).getY()
-                || this.getX() == labyrinthe.persos.get(0).getX()-1 && this.getY() + 1 == labyrinthe.persos.get(0).getY()
-                || this.getX() == labyrinthe.persos.get(0).getX()+1 && this.getY() + 1 == labyrinthe.persos.get(0).getY()
+        if (this.getX() - 1 == labyrinthe.pj.getX() && this.getY() == labyrinthe.pj.getY()
+                || this.getX() + 1 == labyrinthe.pj.getX() && this.getY() == labyrinthe.pj.getY()
+                || this.getX() == labyrinthe.pj.getX() && this.getY() + 1 == labyrinthe.pj.getY()
+                || this.getX() == labyrinthe.pj.getX() && this.getY() - 1 == labyrinthe.pj.getY()
+                || this.getX() == labyrinthe.pj.getX() && this.getY() == labyrinthe.pj.getY()
+                || this.getX() == labyrinthe.pj.getX()-1 && this.getY() - 1 == labyrinthe.pj.getY()
+                || this.getX() == labyrinthe.pj.getX()+1 && this.getY() - 1 == labyrinthe.pj.getY()
+                || this.getX() == labyrinthe.pj.getX()-1 && this.getY() + 1 == labyrinthe.pj.getY()
+                || this.getX() == labyrinthe.pj.getX()+1 && this.getY() + 1 == labyrinthe.pj.getY()
         ) {
             p.subirDegats(dgt);
         }
-        for(int i=1;i<labyrinthe.persos.size();i++){
-            if(labyrinthe.persos.get(i) instanceof Bombe
-                    &&labyrinthe.persos.get(i).getX()==this.getX()
-                    &&labyrinthe.persos.get(i).getY()==this.getY()
+        for(int i=0;i<labyrinthe.monstres.size();i++){
+            if(labyrinthe.monstres.get(i).getX()==this.getX()
+                    &&labyrinthe.monstres.get(i).getY()==this.getY()
             ){
-                labyrinthe.persos.remove(i);
+                labyrinthe.monstres.remove(i);
             }
         }
     }

@@ -38,50 +38,8 @@ public class LabyDessin implements DessinJeu {
                             labyJeu.WIDTH / tailleY
                     );
                 }
-                if (laby.persos.get(0).etrePresent(x, y)) {
-                    gc.setFill(Color.BLUE);
-                    gc.fillOval(
-                            (labyJeu.HEIGHT / taille) * x,
-                            (labyJeu.WIDTH / tailleY) * y,
-                            labyJeu.HEIGHT / taille,
-                            labyJeu.WIDTH / tailleY
-                    );
-                    gc.setFill(Color.WHITE);
-                    String pv = Integer.toString(laby.getPerso(x,y).getVie());
-                    gc.fillText(pv,
-                            (labyJeu.HEIGHT / taille) * x + (labyJeu.HEIGHT / taille) / 2,
-                            (labyJeu.WIDTH / tailleY) * y + (labyJeu.WIDTH / tailleY) / 2 );
-                }
-                if (laby.getPerso(x, y) != null && laby.getPerso(x, y) instanceof Monstre) {
-                    gc.setFill(Color.RED);
-                    gc.fillOval(
-                            (labyJeu.HEIGHT / taille) * x,
-                            (labyJeu.WIDTH / tailleY) * y,
-                            labyJeu.HEIGHT / taille,
-                            labyJeu.WIDTH / tailleY
-                    );
-                    gc.setFill(Color.WHITE);
-                    String pv = Integer.toString(laby.getPerso(x,y).getVie());
-                    gc.fillText(pv,
-                            (labyJeu.HEIGHT / taille) * x + (labyJeu.HEIGHT / taille) / 2,
-                            (labyJeu.WIDTH / tailleY) * y + (labyJeu.WIDTH / tailleY) / 2 );
-                }
-                if (laby.getPerso(x, y) != null && laby.getPerso(x, y) instanceof Monstre) {
-                    gc.setFill(Color.RED);
-                    gc.fillOval(
-                            (labyJeu.HEIGHT / taille) * x,
-                            (labyJeu.WIDTH / tailleY) * y,
-                            labyJeu.HEIGHT / taille,
-                            labyJeu.WIDTH / tailleY
-                    );
-                    gc.setFill(Color.BLACK);
-                    String pv = Integer.toString(laby.getPerso(x,y).getVie());
-                    gc.fillText(pv,
-                            (labyJeu.HEIGHT / taille) * x + (labyJeu.HEIGHT / taille) / 2,
-                            (labyJeu.WIDTH / tailleY) * y + (labyJeu.WIDTH / tailleY) / 2 );
-                }
-                if (laby.getPerso(x, y) != null && laby.getPerso(x, y) instanceof Bombe) {
-                    gc.setFill(Color.PURPLE);
+                if (laby.entites[x][y] != null) {
+                    gc.setFill(laby.entites[x][y].getCouleur());
                     gc.fillOval(
                             (labyJeu.HEIGHT / taille) * x,
                             (labyJeu.WIDTH / tailleY) * y,
@@ -89,6 +47,12 @@ public class LabyDessin implements DessinJeu {
                             labyJeu.WIDTH / tailleY
                     );
                 }
+                gc.setFill(Color.WHITE);
+//                String pv = Integer.toString(laby.getPerso(x,y).getVie());
+//                gc.fillText(pv,
+//                        (labyJeu.HEIGHT / taille) * x + (labyJeu.HEIGHT / taille) / 2,
+//                        (labyJeu.WIDTH / tailleY) * y + (labyJeu.WIDTH / tailleY) / 2 );
+//
             }
         }
     }
