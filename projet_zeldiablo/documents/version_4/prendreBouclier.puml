@@ -1,0 +1,24 @@
+@startuml
+title méthode prendre bouclier
+actor Joueur
+participant Labyrinthe
+participant Bouclier
+
+Joueur -> Labyrinthe: deplacerPerso(action)
+activate Labyrinthe
+Labyrinthe --> Joueur: void
+deactivate Labyrinthe
+
+Joueur -> Labyrinthe: verifierBouclier()
+activate Labyrinthe
+Labyrinthe -> Bouclier: getBouclier(x, y)
+activate Bouclier
+alt Bouclier a la meme position que le joueur
+    Labyrinthe -> Bouclier: Joueur.prendreBouclier()
+    Bouclier --> Joueur: Bouclier
+else Aucun bouclier trouvé
+    Labyrinthe --> Joueur: null
+end
+deactivate Bouclier
+deactivate Labyrinthe
+@enduml
