@@ -1,10 +1,11 @@
 package gameLaby.laby;
 
-public class Item extends Entite {
+public abstract class Entite {
+    int x, y;
 
-    public Item (int abscisse, int ordonne) {
-        super(abscisse, ordonne);
-
+    public Entite(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     public int getX() {
