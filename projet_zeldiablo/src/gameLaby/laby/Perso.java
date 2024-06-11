@@ -4,7 +4,7 @@ package gameLaby.laby;
 /**
  * gere un personnage situe en x,y
  */
-public class Perso extends Entite{
+public abstract class Perso extends Entite{
 
     /**
      * points de vie du personnage
@@ -50,6 +50,47 @@ public class Perso extends Entite{
     public void subirDegats(int dgs){
         if(this.vie>0){
             this.vie-=dgs;
+        }
+    }
+
+    /**
+     * retourne la case suivante selon une actions
+     *
+     * @param x      case depart
+     * @param y      case depart
+     * @param action action effectuee
+     * @return case suivante
+     */
+    static int[] getSuivant(int x, int y, String action) {
+        switch (action) {
+            case Labyrinthe.HAUT:
+                // on monte une ligne
+                y--;
+                break;
+            case Labyrinthe.BAS:
+                // on descend une ligne
+                y++;
+                break;
+            case Labyrinthe.DROITE:
+                // on augmente colonne
+                x++;
+                break;
+            case Labyrinthe.GAUCHE:
+                // on augmente colonne
+                x--;
+                break;
+            default:
+                throw new Error("action inconnue");
+        }
+        int[] res = {x, y};
+        return res;
+    }
+
+    public void majPos(int[] suivante, boolean[][] murs) {
+        if (!murs[suivante[0]][suivante[1]]) {
+            // on met a jour personnage
+            x = suivante[0];
+            y = suivante[1];
         }
     }
 }

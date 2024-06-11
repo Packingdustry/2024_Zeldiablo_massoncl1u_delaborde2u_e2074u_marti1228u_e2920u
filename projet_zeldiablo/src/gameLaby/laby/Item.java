@@ -1,6 +1,6 @@
 package gameLaby.laby;
 
-public class Item extends Entite {
+public abstract class Item extends Entite {
 
     public Item (int abscisse, int ordonne) {
         super(abscisse, ordonne);

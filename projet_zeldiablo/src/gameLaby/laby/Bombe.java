@@ -1,8 +1,10 @@
 package gameLaby.laby;
+import javafx.scene.paint.Color;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Bombe extends Entite{
+public class Bombe extends Entite {
 
     int degats;
     /**
@@ -58,5 +60,9 @@ public class Bombe extends Entite{
             }
         };
         timer.schedule(task, 500);
+    }
+
+    public Color getCouleur() {
+        return Color.VIOLET;
     }
 }

@@ -37,40 +37,12 @@ public class Labyrinthe {
     /**
      * Monstres présents dans le labyrinthe
      */
-    public ArrayList<Perso> persos;
+    public ArrayList<Monstre> monstres;
 
-    /**
-     * retourne la case suivante selon une actions
-     *
-     * @param x      case depart
-     * @param y      case depart
-     * @param action action effectuee
-     * @return case suivante
-     */
-    static int[] getSuivant(int x, int y, String action) {
-        switch (action) {
-            case HAUT:
-                // on monte une ligne
-                y--;
-                break;
-            case BAS:
-                // on descend une ligne
-                y++;
-                break;
-            case DROITE:
-                // on augmente colonne
-                x++;
-                break;
-            case GAUCHE:
-                // on augmente colonne
-                x--;
-                break;
-            default:
-                throw new Error("action inconnue");
-        }
-        int[] res = {x, y};
-        return res;
-    }
+    public Entite[][] entites;
+    public Joueur pj;
+    public Bouclier bouclier;
+    public ArrayList<Bombe> bombes;
 
     /**
      * charge le labyrinthe
@@ -92,7 +64,8 @@ public class Labyrinthe {
 
         // creation labyrinthe vide
         this.murs = new boolean[nbColonnes][nbLignes];
-        this.persos = new ArrayList<Perso>();
+        this.monstres = new ArrayList<Monstre>();
+        this.bombes = new ArrayList<Bombe>();
 
         // lecture des cases
         String ligne = bfRead.readLine();
@@ -117,15 +90,15 @@ public class Labyrinthe {
                         // pas de mur
                         this.murs[colonne][numeroLigne] = false;
                         // ajoute PJ
-                        this.persos.add(0, new Joueur(colonne, numeroLigne, 100));
+                        this.pj = new Joueur(colonne, numeroLigne, 100);
                         break;
                     case MONSTRE:
                         this.murs[colonne][numeroLigne] = false;
-                        this.persos.add(new Monstre(10, 50, colonne, numeroLigne));
+                        this.monstres.add(new Monstre(10, 50, colonne, numeroLigne));
                         break;
                     case BOMBE:
                         this.murs[colonne][numeroLigne] = false;
-                        this.persos.add(new Bombe(colonne, numeroLigne, 10));
+                        this.bombes.add(new Bombe(colonne, numeroLigne, 10));
                         break;
                     default:
                         throw new Error("caractere inconnu " + c);
@@ -140,27 +113,6 @@ public class Labyrinthe {
         // ferme fichier
         bfRead.close();
     }
-
-
-    /**
-     * deplace le personnage en fonction de l'action.
-     * gere la collision avec les murs
-     *
-     * @param action une des actions possibles
-     */
-    public void deplacerPerso(String action) {
-        // case courante
-        int[] courante = {this.persos.get(0).x, this.persos.get(0).y};
-
-        // calcule case suivante
-        int[] suivante = getSuivant(courante[0], courante[1], action);
-
-        // si c'est pas un mur, on effectue le deplacement
-        majPos(0, suivante);
-        ((Joueur)this.persos.get(0)).reinitialiserAttaque();
-        deplacerMonstres();
-    }
-
 
     // ##################################
     // GETTER
@@ -196,25 +148,7 @@ public class Labyrinthe {
     }
 
     /**
-     *
-     */
-    public void verifierMonstre() {
-        int x = persos.get(0).getX();
-        int y = persos.get(0).getY();
-        Joueur j = (Joueur) persos.get(0);
-        if (getMonstre(x, y) != null && !(getMonstre(x, y) instanceof Bombe)&& !j.getAttaqueEnCours()){
-            Monstre m = (Monstre) getMonstre(x, y);
-            j.subirDegats(m.infligerDegat());
-            j.reinitialiserAttaque();
-            j.setAttaqueEnCours();
-        } else if (getMonstre(x, y) != null && (getMonstre(x, y) instanceof Bombe)) {
-            Bombe b = (Bombe) getMonstre(x, y);
-            b.explosion(j,this);
-        }
-    }
-
-    /**
-     * renvoie le perso si il se trouve a la position x,y
+     * Renvoie le perso si il se trouve a la position x,y
      * @param x: position x du perso
      * @param y: position y du perso
      * @return
@@ -229,7 +163,7 @@ public class Labyrinthe {
     }
 
     /**
-     * verifie si il y a un monstre a la position x,y
+     * Verifie si il y a un monstre a la position x,y
      * @param x: position x du monstre
      * @param y: position y du monstre
      * @return
@@ -244,7 +178,7 @@ public class Labyrinthe {
     }
 
     /**
-     * renvoie le nombre de monstres
+     * Renvoie le nombre de monstres
      * @return int representant le nb de monstres
      */
     public int getNbMonstres() {
@@ -258,7 +192,25 @@ public class Labyrinthe {
     }
 
     /**
-     * permet de deplacer les monstres aleatoirement a chaque deplacement
+     * Verifie la presence de monstres et gere les interactions avec le joueur
+     */
+    public void verifierMonstre() {
+        int x = persos.get(0).getX();
+        int y = persos.get(0).getY();
+        Joueur j = (Joueur) persos.get(0);
+        if (getMonstre(x, y) != null && !(getMonstre(x, y) instanceof Bombe) && !j.getAttaqueEnCours()) {
+            Monstre m = (Monstre) getMonstre(x, y);
+            j.subirDegats(m.infligerDegat());
+            j.reinitialiserAttaque();
+            j.setAttaqueEnCours();
+        } else if (getMonstre(x, y) != null && (getMonstre(x, y) instanceof Bombe)) {
+            Bombe b = (Bombe) getMonstre(x, y);
+            b.explosion(j, this);
+        }
+    }
+
+    /**
+     * Permet de deplacer les monstres aleatoirement a chaque deplacement
      */
     public void deplacerMonstres() {
         for (int i = 1; i < persos.size(); i++) {
@@ -283,7 +235,7 @@ public class Labyrinthe {
     }
 
     /**
-     * met a jour la position des persos
+     * Met a jour la position des persos
      * @param i
      * @param suivante
      */

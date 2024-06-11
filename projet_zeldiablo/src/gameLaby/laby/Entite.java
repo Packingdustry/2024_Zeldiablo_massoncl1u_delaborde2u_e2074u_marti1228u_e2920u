@@ -1,5 +1,7 @@
 package gameLaby.laby;
 
+import javafx.scene.paint.Color;
+
 public abstract class Entite {
     int x, y;
 
@@ -15,4 +17,6 @@ public abstract class Entite {
     public int getY() {
         return this.y;
     }
+
+    public abstract Color getCouleur();
 }

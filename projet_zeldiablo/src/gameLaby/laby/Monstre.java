@@ -1,5 +1,7 @@
 package gameLaby.laby;
 
+import javafx.scene.paint.Color;
+
 public class Monstre extends Perso {
     /**
      * indique les degats que met un monstre
@@ -29,5 +31,24 @@ public class Monstre extends Perso {
         else{
             return 0;
         }
+    }
+
+    public Color getCouleur() {
+        return Color.RED;
+    }
+
+    public void deplacerMonstre(boolean[][] murs) {
+        double direction = Math.random();
+        int[] suivante = new int[2];
+        if (direction < 0.25) {
+            suivante = getSuivant(x, y, Labyrinthe.HAUT);
+        } else if (direction >= 0.25 && direction < 0.5) {
+            suivante = getSuivant(x, y, Labyrinthe.DROITE);
+        } else if (direction >= 0.5 && direction < 0.75) {
+            suivante = getSuivant(x, y, Labyrinthe.BAS);
+        } else {
+            suivante = getSuivant(x, y, Labyrinthe.GAUCHE);
+        }
+        majPos(suivante, murs);
     }
 }

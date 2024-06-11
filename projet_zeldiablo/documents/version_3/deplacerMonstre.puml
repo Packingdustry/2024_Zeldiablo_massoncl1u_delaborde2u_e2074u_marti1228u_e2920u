@@ -67,4 +67,9 @@ activate l
   deactivate l
 m <-- l
 deactivate l
+
+note across
+ceci est une note
+
+end note
 @enduml
