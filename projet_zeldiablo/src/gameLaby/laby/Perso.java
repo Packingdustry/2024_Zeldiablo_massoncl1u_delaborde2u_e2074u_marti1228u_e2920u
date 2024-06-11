@@ -87,9 +87,7 @@ public abstract class Perso extends Entite{
     }
 
     public void majPos(int[] suivante, boolean[][] murs) {
-        System.out.println("majPos");
         if (!murs[suivante[0]][suivante[1]]) {
-            System.out.println("non mur");
             // on met a jour personnage
             x = suivante[0];
             y = suivante[1];

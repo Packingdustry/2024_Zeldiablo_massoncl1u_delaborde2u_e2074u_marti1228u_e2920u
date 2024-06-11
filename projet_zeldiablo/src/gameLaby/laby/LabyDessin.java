@@ -43,22 +43,27 @@ public class LabyDessin implements DessinJeu {
                             labyJeu.WIDTH / tailleY
                     );
                 }
-                if (laby.entites[x][y] != null) {
-                    gc.setFill(laby.entites[x][y].getCouleur());
-                    gc.fillOval(
-                            (labyJeu.HEIGHT / taille) * x,
-                            (labyJeu.WIDTH / tailleY) * y,
-                            labyJeu.HEIGHT / taille,
-                            labyJeu.WIDTH / tailleY
-                    );
-                }
-//                gc.setFill(Color.WHITE);
-//                String pv = Integer.toString(laby.getPerso(x,y).getVie());
-//                gc.fillText(pv,
-//                        (labyJeu.HEIGHT / taille) * x + (labyJeu.HEIGHT / taille) / 2,
-//                        (labyJeu.WIDTH / tailleY) * y + (labyJeu.WIDTH / tailleY) / 2 );
-
             }
         }
+        for (Entite e : laby.entites) {
+            gc.setFill(e.getCouleur());
+            gc.fillOval(
+                    (labyJeu.HEIGHT / taille) * e.getX(),
+                    (labyJeu.WIDTH / tailleY) * e.getY(),
+                    labyJeu.HEIGHT / taille,
+                    labyJeu.WIDTH / tailleY
+            );
+        }
+        for (Monstre m : laby.monstres) {
+            gc.setFill(Color.WHITE);
+            String pv = Integer.toString(m.getVie());
+            gc.fillText(pv,
+                    (labyJeu.HEIGHT / taille) * m.getX() + (labyJeu.HEIGHT / taille) / 2,
+                    (labyJeu.WIDTH / tailleY) * m.getY() + (labyJeu.WIDTH / tailleY) / 2);
+            }
+        String pv = Integer.toString(laby.pj.getVie());
+            gc.fillText(pv,
+            (labyJeu.HEIGHT / taille) * laby.pj.getX() + (labyJeu.HEIGHT / taille) / 2,
+            (labyJeu.WIDTH / tailleY) * laby.pj.getY() + (labyJeu.WIDTH / tailleY) / 2);
     }
 }

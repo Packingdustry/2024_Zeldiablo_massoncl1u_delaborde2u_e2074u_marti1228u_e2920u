@@ -41,7 +41,7 @@ public class Labyrinthe {
      */
     public ArrayList<Monstre> monstres;
 
-    public Entite[][] entites;
+    public ArrayList<Entite> entites;
     public Joueur pj;
     public Bouclier bouclier;
     public ArrayList<Bombe> bombes;
@@ -66,7 +66,7 @@ public class Labyrinthe {
 
         // creation labyrinthe vide
         this.murs = new boolean[nbColonnes][nbLignes];
-        this.entites = new Entite[nbColonnes][nbLignes];
+        this.entites = new ArrayList<>();
         this.monstres = new ArrayList<>();
         this.bombes = new ArrayList<>();
 
@@ -85,30 +85,28 @@ public class Labyrinthe {
                 switch (c) {
                     case MUR:
                         this.murs[colonne][numeroLigne] = true;
-                        this.entites[colonne][numeroLigne] = null;
                         break;
                     case VIDE:
                         this.murs[colonne][numeroLigne] = false;
-                        this.entites[colonne][numeroLigne] = null;
                         break;
                     case PJ:
                         // pas de mur
                         this.murs[colonne][numeroLigne] = false;
                         // ajoute PJ
                         this.pj = new Joueur(colonne, numeroLigne, 100);
-                        this.entites[colonne][numeroLigne] = pj;
+                        this.entites.add(pj);
                         break;
                     case MONSTRE:
                         this.murs[colonne][numeroLigne] = false;
                         Monstre m = new Monstre(10, 50, colonne, numeroLigne);
                         this.monstres.add(m);
-                        this.entites[colonne][numeroLigne] = m;
+                        this.entites.add(m);
                         break;
                     case BOMBE:
                         this.murs[colonne][numeroLigne] = false;
                         Bombe b = new Bombe(colonne, numeroLigne, 10);
                         this.bombes.add(b);
-                        this.entites[colonne][numeroLigne] = b;
+                        this.entites.add(b);
                         break;
                     default:
                         throw new Error("caractere inconnu " + c);
