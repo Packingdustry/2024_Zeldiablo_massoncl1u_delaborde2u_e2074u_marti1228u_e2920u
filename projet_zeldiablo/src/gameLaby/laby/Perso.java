@@ -61,7 +61,7 @@ public abstract class Perso extends Entite{
      * @param action action effectuee
      * @return case suivante
      */
-    static int[] getSuivant(int x, int y, String action) {
+    int[] getSuivant(int x, int y, String action) {
         switch (action) {
             case Labyrinthe.HAUT:
                 // on monte une ligne
@@ -87,7 +87,9 @@ public abstract class Perso extends Entite{
     }
 
     public void majPos(int[] suivante, boolean[][] murs) {
+        System.out.println("majPos");
         if (!murs[suivante[0]][suivante[1]]) {
+            System.out.println("non mur");
             // on met a jour personnage
             x = suivante[0];
             y = suivante[1];

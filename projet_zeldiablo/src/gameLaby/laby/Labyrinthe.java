@@ -1,5 +1,7 @@
 package gameLaby.laby;
 
+import moteurJeu.Clavier;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -64,8 +66,9 @@ public class Labyrinthe {
 
         // creation labyrinthe vide
         this.murs = new boolean[nbColonnes][nbLignes];
-        this.monstres = new ArrayList<Monstre>();
-        this.bombes = new ArrayList<Bombe>();
+        this.entites = new Entite[nbColonnes][nbLignes];
+        this.monstres = new ArrayList<>();
+        this.bombes = new ArrayList<>();
 
         // lecture des cases
         String ligne = bfRead.readLine();
@@ -82,23 +85,30 @@ public class Labyrinthe {
                 switch (c) {
                     case MUR:
                         this.murs[colonne][numeroLigne] = true;
+                        this.entites[colonne][numeroLigne] = null;
                         break;
                     case VIDE:
                         this.murs[colonne][numeroLigne] = false;
+                        this.entites[colonne][numeroLigne] = null;
                         break;
                     case PJ:
                         // pas de mur
                         this.murs[colonne][numeroLigne] = false;
                         // ajoute PJ
                         this.pj = new Joueur(colonne, numeroLigne, 100);
+                        this.entites[colonne][numeroLigne] = pj;
                         break;
                     case MONSTRE:
                         this.murs[colonne][numeroLigne] = false;
-                        this.monstres.add(new Monstre(10, 50, colonne, numeroLigne));
+                        Monstre m = new Monstre(10, 50, colonne, numeroLigne);
+                        this.monstres.add(m);
+                        this.entites[colonne][numeroLigne] = m;
                         break;
                     case BOMBE:
                         this.murs[colonne][numeroLigne] = false;
-                        this.bombes.add(new Bombe(colonne, numeroLigne, 10));
+                        Bombe b = new Bombe(colonne, numeroLigne, 10);
+                        this.bombes.add(b);
+                        this.entites[colonne][numeroLigne] = b;
                         break;
                     default:
                         throw new Error("caractere inconnu " + c);
@@ -147,103 +157,35 @@ public class Labyrinthe {
         return this.murs[x][y];
     }
 
-    /**
-     * Renvoie le perso si il se trouve a la position x,y
-     * @param x: position x du perso
-     * @param y: position y du perso
-     * @return
-     */
-    public Perso getPerso(int x, int y) {
-        for (Perso perso : persos) {
-            if (perso.getX() == x && perso.getY() == y) {
-                return perso;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Verifie si il y a un monstre a la position x,y
-     * @param x: position x du monstre
-     * @param y: position y du monstre
-     * @return
-     */
-    public Perso getMonstre(int x, int y) {
-        for (int i = 1; i < persos.size(); i++) {
-            if (persos.get(i).getX() == x && persos.get(i).getY() == y) {
-                return persos.get(i);
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Renvoie le nombre de monstres
-     * @return int representant le nb de monstres
-     */
     public int getNbMonstres() {
-        int nbMonstres = 0;
-        for (Perso p : persos) {
-            if (p instanceof Monstre) {
-                nbMonstres++;
-            }
-        }
-        return nbMonstres;
+        return monstres.size();
     }
 
-    /**
-     * Verifie la presence de monstres et gere les interactions avec le joueur
-     */
-    public void verifierMonstre() {
-        int x = persos.get(0).getX();
-        int y = persos.get(0).getY();
-        Joueur j = (Joueur) persos.get(0);
-        if (getMonstre(x, y) != null && !(getMonstre(x, y) instanceof Bombe) && !j.getAttaqueEnCours()) {
-            Monstre m = (Monstre) getMonstre(x, y);
-            j.subirDegats(m.infligerDegat());
-            j.reinitialiserAttaque();
-            j.setAttaqueEnCours();
-        } else if (getMonstre(x, y) != null && (getMonstre(x, y) instanceof Bombe)) {
-            Bombe b = (Bombe) getMonstre(x, y);
-            b.explosion(j, this);
+    public void actualiser(Clavier clavier) {
+        if (clavier.droite) {
+            pj.deplacerPerso(Labyrinthe.DROITE, murs, monstres);
+            clavier.droite =false;
+        }else if (clavier.gauche) {
+            pj.deplacerPerso(Labyrinthe.GAUCHE, murs, monstres);
+            clavier.gauche =false;
+        }else if (clavier.bas) {
+            pj.deplacerPerso(Labyrinthe.BAS, murs, monstres);
+            clavier.bas =false;
+        }else if (clavier.haut) {
+            pj.deplacerPerso(Labyrinthe.HAUT, murs, monstres);
+            clavier.haut =false;
         }
-    }
-
-    /**
-     * Permet de deplacer les monstres aleatoirement a chaque deplacement
-     */
-    public void deplacerMonstres() {
-        for (int i = 1; i < persos.size(); i++) {
-            if (persos.get(i) instanceof Monstre) {
-                Monstre m = (Monstre) persos.get(i);
-                double direction = Math.random();
-                int x = m.getX();
-                int y = m.getY();
-                int[] suivante = new int[2];
-                if (direction < 0.25) {
-                    suivante = getSuivant(x, y, Labyrinthe.HAUT);
-                } else if (direction >= 0.25 && direction < 0.5) {
-                    suivante = getSuivant(x, y, Labyrinthe.DROITE);
-                } else if (direction >= 0.5 && direction < 0.75) {
-                    suivante = getSuivant(x, y, Labyrinthe.BAS);
-                } else {
-                    suivante = getSuivant(x, y, Labyrinthe.GAUCHE);
+        else if(clavier.space){
+            for(Monstre m : monstres){
+                if(m.getX()-1==pj.getX() && m.getY()==pj.getY()
+                        || m.getX()+1==pj.getX() && m.getY()==pj.getY()
+                        || m.getX()==pj.getX() && m.getY()-1==pj.getY()
+                        || m.getX()==pj.getX() && m.getY()+1==pj.getY()
+                ){
+                    m.subirDegats(Perso.degats);
                 }
-                majPos(i, suivante);
             }
         }
-    }
-
-    /**
-     * Met a jour la position des persos
-     * @param i
-     * @param suivante
-     */
-    public void majPos(int i, int[] suivante) {
-        if (!this.murs[suivante[0]][suivante[1]]) {
-            // on met a jour personnage
-            this.persos.get(i).x = suivante[0];
-            this.persos.get(i).y = suivante[1];
-        }
+        pj.verifierMonstre(this, monstres, bombes);
     }
 }

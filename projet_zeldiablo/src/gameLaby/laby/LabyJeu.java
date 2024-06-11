@@ -27,31 +27,7 @@ public class LabyJeu implements Jeu {
      */
     @Override
     public void update(double secondes, Clavier clavier) {
-        if (clavier.droite) {
-            labyrinthe.deplacerPerso(Labyrinthe.DROITE);
-            clavier.droite =false;
-        }else if (clavier.gauche) {
-            labyrinthe.deplacerPerso(Labyrinthe.GAUCHE);
-            clavier.gauche =false;
-        }else if (clavier.bas) {
-            labyrinthe.deplacerPerso(Labyrinthe.BAS);
-            clavier.bas =false;
-        }else if (clavier.haut) {
-            labyrinthe.deplacerPerso(Labyrinthe.HAUT);
-            clavier.haut =false;
-        }
-        else if(clavier.space){
-            for(int i=1;i<labyrinthe.persos.size();i++){
-                if(labyrinthe.persos.get(i).getX()-1==labyrinthe.persos.get(0).getX() && labyrinthe.persos.get(i).getY()==labyrinthe.persos.get(0).getY()
-                || labyrinthe.persos.get(i).getX()+1==labyrinthe.persos.get(0).getX() && labyrinthe.persos.get(i).getY()==labyrinthe.persos.get(0).getY()
-                        || labyrinthe.persos.get(i).getX()==labyrinthe.persos.get(0).getX() && labyrinthe.persos.get(i).getY()-1==labyrinthe.persos.get(0).getY()
-                        || labyrinthe.persos.get(i).getX()==labyrinthe.persos.get(0).getX() && labyrinthe.persos.get(i).getY()+1==labyrinthe.persos.get(0).getY()
-                ){
-                   labyrinthe.persos.get(i).subirDegats(Perso.degats);
-                }
-            }
-        }
-        labyrinthe.verifierMonstre();
+        labyrinthe.actualiser(clavier);
         if (etreFini()) {
             System.out.println("Game Over");
             Platform.exit();
@@ -72,13 +48,13 @@ public class LabyJeu implements Jeu {
     public boolean etreFini() {
         boolean fin = false;
         int nbMorts = 0;
-        if(labyrinthe.persos.get(0).getVie() <= 0) {
+        if(labyrinthe.pj.getVie() <= 0) {
             fin = true;
         }
         else{
-            for(int i=1;i<labyrinthe.persos.size();i++){
-                if(labyrinthe.persos.get(i).getVie()<=0){
-                    labyrinthe.persos.remove(i);
+            for(int i=0;i<labyrinthe.getNbMonstres();i++){
+                if(labyrinthe.monstres.get(i).getVie()<=0){
+                    labyrinthe.monstres.remove(i);
                 }
             }
         }
