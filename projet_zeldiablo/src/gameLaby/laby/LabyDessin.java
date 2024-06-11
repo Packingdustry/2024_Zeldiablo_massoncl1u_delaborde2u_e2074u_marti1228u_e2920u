@@ -47,12 +47,12 @@ public class LabyDessin implements DessinJeu {
                             labyJeu.WIDTH / tailleY
                     );
                 }
-                gc.setFill(Color.WHITE);
+//                gc.setFill(Color.WHITE);
 //                String pv = Integer.toString(laby.getPerso(x,y).getVie());
 //                gc.fillText(pv,
 //                        (labyJeu.HEIGHT / taille) * x + (labyJeu.HEIGHT / taille) / 2,
 //                        (labyJeu.WIDTH / tailleY) * y + (labyJeu.WIDTH / tailleY) / 2 );
-//
+
             }
         }
     }

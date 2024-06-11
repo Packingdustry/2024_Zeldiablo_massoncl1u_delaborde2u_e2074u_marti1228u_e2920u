@@ -37,12 +37,17 @@ class Labyrinthe {
   + {static} GAUCHE : String
   + {static} DROITE : String
   + murs : boolean[][]
+  + monstres : ArrayList<Monstre>
+  + entites : Entite[][]
+  + pj : Joueur
+  + bouclier : Bouclier
+  + bombes : ArrayList<Bombe>
   + Labyrinthe(String)
-  + etreFini() : boolean
   + getLengthY() : int
   + getLength() : int
   + getMur(int, int) : boolean
   + getMonstre(int, int) : Monstre
+  + actualiser(Clavier) : void
 }
 
 
@@ -104,6 +109,7 @@ class Joueur extends Perso{
 
 abstract class Item extends Entite {
   - DansInventaire : boolean
+  + Item(int, int)
 }
 
 class Bouclier extends Item {
