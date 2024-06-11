@@ -65,6 +65,10 @@ public class LabyJeu implements Jeu {
         return fin;
     }
 
+    /**
+     * méthode qui permet de récupérer le labyrinthe
+     * @return le labyrinthe
+     */
     public Labyrinthe getLabyrinthe() {
         return labyrinthe;
     }

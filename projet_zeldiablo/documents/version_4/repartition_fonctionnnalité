@@ -1,3 +1,6 @@
 pour cette dernière itération nous devons :
     - finir l'ajout d'un bouclier qui permet au joueur d'avoir plus de vie
     - revoir la conception de notre code (tous le monde)
+        - afficher le bouclier
+            - le faire disparaitre quand on le recupère
+            - ajouter les pv supplémentaire

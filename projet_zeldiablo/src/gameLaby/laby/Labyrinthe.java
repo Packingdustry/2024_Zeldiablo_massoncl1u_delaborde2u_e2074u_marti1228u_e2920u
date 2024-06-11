@@ -41,9 +41,23 @@ public class Labyrinthe {
      */
     public ArrayList<Monstre> monstres;
 
+    /**
+     * liste d'entites
+     */
     public ArrayList<Entite> entites;
+
+    /**
+     * joueur
+     */
     public Joueur pj;
+    /**
+     * Bouclier
+     */
     public Bouclier bouclier;
+
+    /**
+     * liste de bombes
+     */
     public ArrayList<Bombe> bombes;
 
     /**
@@ -122,13 +136,9 @@ public class Labyrinthe {
         bfRead.close();
     }
 
-    // ##################################
-    // GETTER
-    // ##################################
 
     /**
      * return taille selon Y
-     *
      * @return
      */
     public int getLengthY() {
@@ -137,7 +147,6 @@ public class Labyrinthe {
 
     /**
      * return taille selon X
-     *
      * @return
      */
     public int getLength() {
@@ -155,10 +164,18 @@ public class Labyrinthe {
         return this.murs[x][y];
     }
 
+    /**
+     * permet de connnaitre le nombre de monstre qu'il y a dans le jeu
+     * @return le nombre de monstre
+     */
     public int getNbMonstres() {
         return monstres.size();
     }
 
+    /**
+     * permet le deplacement et les attaques en fonstion de la touche du clavier qui est pressé
+     * @param clavier touche du clavier utilisé
+     */
     public void actualiser(Clavier clavier) {
         if (clavier.droite) {
             pj.deplacerPerso(Labyrinthe.DROITE, murs, monstres);
