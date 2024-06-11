@@ -162,15 +162,6 @@ public class Labyrinthe {
     }
 
 
-    /**
-     * jamais fini
-     *
-     * @return fin du jeu
-     */
-    public boolean etreFini() {
-        return false;
-    }
-
     // ##################################
     // GETTER
     // ##################################

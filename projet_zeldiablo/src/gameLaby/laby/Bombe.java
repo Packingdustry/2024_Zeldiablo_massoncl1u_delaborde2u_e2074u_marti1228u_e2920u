@@ -2,16 +2,18 @@ package gameLaby.laby;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Bombe extends Perso{
+public class Bombe extends Entite{
+
+    int degats;
     /**
      * constructeur
-     *
      * @param dx position selon x
      * @param dy position selon y
      * @param dgt degat de la bombe
      */
     public Bombe(int dx, int dy, int dgt){
-        super(dx,dy,dgt);
+        super(dx,dy);
+        this.degats = dgt;
     }
 
     /**
