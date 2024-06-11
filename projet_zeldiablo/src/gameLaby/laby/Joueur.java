@@ -57,9 +57,7 @@ public class Joueur extends Perso{
         int[] suivante = getSuivant(courante[0], courante[1], action);
 
         // si c'est pas un mur, on effectue le deplacement
-        System.out.println("x : " + x + "\ny : " + y);
         this.majPos(suivante, murs);
-        System.out.println("x : " + x + "\ny : " + y);
         reinitialiserAttaque();
         for (Monstre m : monstres) {
             m.deplacerMonstre(murs);

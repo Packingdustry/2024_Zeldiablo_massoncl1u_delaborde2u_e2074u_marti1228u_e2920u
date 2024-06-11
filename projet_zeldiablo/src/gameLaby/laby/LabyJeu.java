@@ -52,9 +52,10 @@ public class LabyJeu implements Jeu {
             fin = true;
         }
         else{
-            for(int i=0;i<labyrinthe.getNbMonstres();i++){
-                if(labyrinthe.monstres.get(i).getVie()<=0){
-                    labyrinthe.monstres.remove(i);
+            for(Monstre m : labyrinthe.monstres){
+                if(m.getVie()<=0){
+                    labyrinthe.monstres.remove(m);
+                    labyrinthe.entites.remove(m);
                 }
             }
         }

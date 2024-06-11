@@ -37,13 +37,8 @@ public class Bombe extends Entite {
         ) {
             p.subirDegats(dgt);
         }
-        for(int i=0;i<labyrinthe.monstres.size();i++){
-            if(labyrinthe.monstres.get(i).getX()==this.getX()
-                    &&labyrinthe.monstres.get(i).getY()==this.getY()
-            ){
-                labyrinthe.monstres.remove(i);
-            }
-        }
+        labyrinthe.bombes.remove(this);
+        labyrinthe.entites.remove(this);
     }
 
     /**
