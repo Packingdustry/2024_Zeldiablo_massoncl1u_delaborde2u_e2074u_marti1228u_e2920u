@@ -37,7 +37,6 @@ public abstract class Perso extends Entite{
 
 
     /**
-     *
      * @return vie du personnage
      */
     public int getVie(){
@@ -87,6 +86,11 @@ public abstract class Perso extends Entite{
         return res;
     }
 
+    /**
+     * permet de mettre a jour la postion d'un personnage
+     * @param suivante la case vers laquelle on se deplace
+     * @param murs mur du labyrinthe
+     */
     public void majPos(int[] suivante, boolean[][] murs) {
         if (!murs[suivante[0]][suivante[1]]) {
             // on met a jour personnage

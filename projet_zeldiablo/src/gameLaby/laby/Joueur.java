@@ -71,6 +71,13 @@ public class Joueur extends Perso{
         }
     }
 
+    /**
+     * methode qui permet de verifier si un monstre est a la même postion que le joueur si il y en a un le joueur
+     * prend des degats
+     * @param laby labyrinnthe
+     * @param monstres liste de monstres
+     * @param bombes liste de bombes
+     */
     public void verifierMonstre(Labyrinthe laby, ArrayList<Monstre> monstres, ArrayList<Bombe> bombes) {
         if (getMonstre(x, y, monstres) != null && !getAttaqueEnCours()) {
             Monstre m = getMonstre(x, y, monstres);
@@ -90,6 +97,13 @@ public class Joueur extends Perso{
         }
     }
 
+    /**
+     * methode qui permet de savoir où se situe un monstre
+     * @param x abscisse
+     * @param y ordonnee
+     * @param monstres liste de monstres
+     * @return le monstre s'il est a la postion x, y sinon null
+     */
     public Monstre getMonstre(int x, int y, ArrayList<Monstre> monstres) {
         for (Monstre m : monstres) {
             if (m.getX() == x && m.getY() == y) {
@@ -99,6 +113,13 @@ public class Joueur extends Perso{
         return null;
     }
 
+    /**
+     * methode qui permet de savoir où se situe une bombe
+     * @param x abscisse
+     * @param y ordonnee
+     * @param bombes list de bombes
+     * @return la bombe si elle est la position x, y ou null
+     */
     public Bombe getBombe(int x, int y, ArrayList<Bombe> bombes) {
         for (Bombe bombe : bombes) {
             if (bombe.getX() == x && bombe.getY() == y) {

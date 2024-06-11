@@ -5,7 +5,6 @@ participant Labyrinthe
 
 Jeu -> Labyrinthe: deplacerPerso(action)
 activate Labyrinthe
-deactivate Labyrinthe
 
 Labyrinthe -> Joueur : getX()
 Joueur --> Labyrinthe : x

@@ -8,8 +8,8 @@ import javax.swing.plaf.LabelUI;
 import java.io.IOException;
 
 public class LabyJeu implements Jeu {
-    public static final int WIDTH = 600;
-    public static final int HEIGHT = 800;
+    public static final int WIDTH = 900;
+    public static final int HEIGHT = 1200;
     public static final String FICHIER = "labySimple/laby2.txt";
 
     private final Labyrinthe labyrinthe;
@@ -65,6 +65,10 @@ public class LabyJeu implements Jeu {
         return fin;
     }
 
+    /**
+     * méthode qui permet de récupérer le labyrinthe
+     * @return le labyrinthe
+     */
     public Labyrinthe getLabyrinthe() {
         return labyrinthe;
     }
