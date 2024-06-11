@@ -12,6 +12,10 @@ public class Bouclier extends Item {
         this. vie = v;
     }
 
+    /**
+     * methode qui fait subir des degats au bouclier
+     * @param dgt
+     */
     public void subirDegats(int dgt){
         this.vie-=dgt;
     }
