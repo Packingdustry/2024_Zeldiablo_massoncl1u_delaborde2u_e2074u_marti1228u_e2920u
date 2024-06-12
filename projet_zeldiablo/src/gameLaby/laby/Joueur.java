@@ -90,7 +90,6 @@ public class Joueur extends Perso{
             else{
                 subirDegats(m.infligerDegat());
             }
-            reinitialiserAttaque();
             setAttaqueEnCours();
         } else if (getBombe(x, y, bombes) != null && !getAttaqueEnCours()) {
             getBombe(x, y, bombes).explosion(this, laby);
