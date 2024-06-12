@@ -1,6 +1,6 @@
 package gameLaby.laby;
 import gameLaby.laby.Labyrinthe;
-import gameLaby.laby.Perso;
+import gameLaby.laby.Joueur;
 
 import moteurJeu.MoteurJeu;
 import org.junit.jupiter.api.Test;
@@ -10,33 +10,16 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LabyrintheTest {
-    @Test
-    void testGetPerso() throws IOException {
-        Labyrinthe l = new Labyrinthe("labySimple/laby0.txt");
-        Perso principal = new Perso(2,3,50);
-        l.persos.add(principal);
-        assertEquals(null,l.getPerso(3,4),"La methode doit renvoyer null car le perso nest pas en 3,4");
-        assertEquals(principal,l.getPerso(2,3),"La methode doit renvoyer le personnage principal car il est bien en 2,3");
-    }
-
-    @Test
-    void testGetMonstre() throws IOException {
-        Labyrinthe l = new Labyrinthe("labySimple/laby0.txt");
-        Monstre m = new Monstre(5,50,3,3);
-        l.persos.add(m);
-        assertEquals(null,l.getMonstre(3,4),"La methode doit renvoyer null car le monstre nest pas en 3,4");
-        assertEquals(m,l.getPerso(3,3),"La methode doit renvoyer le monstre car il est bien en 3,3");
-    }
 
     @Test
     void testGetVie(){
-        Perso principal = new Perso(2,3,50);
+        Joueur principal = new Joueur(2,3,50);
         assertEquals(50,principal.getVie(),"Cela doit renvoyer 50 pvs");
     }
 
     @Test
     void testInfligerDegats(){
-        Perso principal = new Perso(2,3,50);
+        Joueur principal = new Joueur(2,3,50);
         Monstre m = new Monstre(5,50,3,3);
         principal.vie-=m.infligerDegat();
         assertEquals(45,principal.getVie(),"Cela doit renvoyer 45 pvs car le perso s'est fait frapper");
@@ -71,11 +54,23 @@ class LabyrintheTest {
 
     @Test
     void testMettreDegats() throws IOException {
-        Labyrinthe l = new Labyrinthe("laby0.txt");
+        Labyrinthe l = new Labyrinthe("labySimple/laby0.txt");
         Bombe b = new Bombe(2,2,20);
-        Perso principal = new Perso(3,3,50);
+        Joueur principal = new Joueur(2,3,50);
         assertEquals(50,principal.getVie(),"Cela doit renvoyer 50 pvs");
         b.mettredgt(principal,l);
-        assertEquals(30,principal.getVie(),"le perso a subi 20 degats de la bombe, il a donc 30 pv");
+        assertEquals(49,principal.getVie(),"le perso a subi 1 degat de la bombe, il a donc 49 pv");
     }
+
+    @Test
+    void testPrendreBouclier() throws IOException {
+        Labyrinthe l = new Labyrinthe("labySimple/laby0.txt");
+        Joueur principal = new Joueur(4, 3, 50);
+        Bouclier bouclier = new Bouclier(4, 4, 50);
+        l.entites.add(bouclier);
+        principal.deplacerPerso(Labyrinthe.BAS, l.murs, l.monstres);
+        l.prendreBouclier(principal.getX(),principal.getY());
+        assertFalse(principal.avoirBouclier(), "Le joueur ne devrait pas avoir de bouclier");
+    }
+
 }

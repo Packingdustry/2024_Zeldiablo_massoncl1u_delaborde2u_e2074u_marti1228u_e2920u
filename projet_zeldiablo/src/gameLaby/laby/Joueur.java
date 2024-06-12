@@ -128,4 +128,16 @@ public class Joueur extends Perso{
         }
         return null;
     }
+
+    public Bouclier getBouclier(){
+        return this.bouclier;
+    }
+    public boolean avoirBouclier(){
+        if(this.bouclier!=null){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     }

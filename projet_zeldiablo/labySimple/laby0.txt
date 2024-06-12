@@ -3,5 +3,5 @@
 XXXXXXX
 XM....X
 X..P..X
-X.....X
+X..S..X
 XXXXXXX
