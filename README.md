@@ -30,3 +30,15 @@ Bilan a la fin de cette première itération :
 La première et la deuxième fonctionnalités fonctionne parfaitement, la dernière reste a finir
 car elle est beaucoup plus complexe a réalisé que les précédentes.
 
+## 2<sup>ème</sup> sprint
+
+Pour cette itération, nous avons choisi d'ajouter :
+
+- la mort des monstres, les monstres peuvent se faire attaquer par le joueur (Aloïs)
+- attaque du joueur, il peut désormais attaquer les monstres (Quentin)
+- fin du jeu mort du héros, les monstres peuvent attaquer le joueur, si le héros meurt le joueur a perdu le jeu (Baptiste)
+- fin du jeu victoire du héros, le héros peut gagner s'il tue tous les monstres (Baptiste)
+
+Bilan de fin de deuxième itération :
+toutes les fonctionnalités que nous avons choisi d'ajouter fonctionne parfaitement
+
