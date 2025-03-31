@@ -16,19 +16,20 @@ ainsi que le développement en méthode AGILE.
 # Déroulement du projet
 
 Comme annoncé précédemment, le projet s'est déroulé en plusieurs "sprints"
-qui vont être énumerés ci-dessous.
+qui vont être énumérés ci-dessous.
 
 ## 1<sup>er</sup> sprint
 
 les fonctionnalités que nous avons choisis d'ajouter sont :
 
-- des monstres immobiles capable d'infliger des dégats lorsque le joueur passe dessus (Aloïs)
+- des monstres immobiles capable d'infliger des dégâts lorsque le joueur passe dessus (Aloïs)
 - ajouts de point de vie au joueur et aux monstres (Baptiste)
-- une bombe capable d'exploser et infliger des dégats a tout ce qui est autour d'elle (Léo et Quentin)
+- une bombe capable d'exploser et infliger des dégâts a tout ce qui est autour d'elle (Léo et Quentin)
 
 Bilan a la fin de cette première itération :
-La première et la deuxième fonctionnalités fonctionne parfaitement, la dernière reste a finir
-car elle est beaucoup plus complexe a réalisé que les précédentes.
+
+Les première et deuxième fonctionnalités fonctionnent parfaitement, la dernière reste a finir
+car elle est beaucoup plus complexe à réaliser que les précédentes.
 
 ## 2<sup>ème</sup> sprint
 
@@ -40,23 +41,23 @@ Pour cette itération, nous avons choisi d'ajouter :
 - fin du jeu victoire du héros, le héros peut gagner s'il tue tous les monstres (Baptiste)
 
 Bilan de fin de deuxième itération :
-toutes les fonctionnalités que nous avons choisi d'ajouter fonctionne parfaitement
+
+Toutes les fonctionnalités que nous avons choisi d'ajouter fonctionnent parfaitement.
 
 ## 3<sup>ème</sup> sprint
 
-pour cette 3ème itération nous avons choisi de réalisé les fonctionnalité suivantes :
+pour cette 3<sup>ème</sup> itération nous avons choisi de réalisé les fonctionnalité suivantes :
 
-- déplacement aléatoire des monstres(Alois)
+- déplacement aléatoire des monstres (Aloïs)
 - ajout d'un bouclier qui permet de doubler la vie du personnage (Baptiste)
   - afficher le bouclier
-  - le faire disparaitre quand on le recupère
+  - le faire disparaître quand on le récupère
   - ajouter les pv supplémentaire
 - régler problème de la bombe (Quentin)
-  - methode exploser (mettre des degats au joueur)
-  - la faire disparaitre une fois quelle a exploser
+  - méthode exploser (mettre des dégâts au joueur)
+  - la faire disparaître une fois quelle a exploser
 
 bilan de fin d'itération :
 
-Les monstres se deplacent aléatoirement, la bombe fonctionne,
-il faut terminer de faire le bouclier
-
+Les monstres se déplacent aléatoirement, la bombe fonctionne,
+il faut terminer de faire le bouclier.
