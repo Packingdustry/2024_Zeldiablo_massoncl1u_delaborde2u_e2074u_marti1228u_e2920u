@@ -42,3 +42,21 @@ Pour cette itération, nous avons choisi d'ajouter :
 Bilan de fin de deuxième itération :
 toutes les fonctionnalités que nous avons choisi d'ajouter fonctionne parfaitement
 
+## 3<sup>ème</sup> sprint
+
+pour cette 3ème itération nous avons choisi de réalisé les fonctionnalité suivantes :
+
+- déplacement aléatoire des monstres(Alois)
+- ajout d'un bouclier qui permet de doubler la vie du personnage (Baptiste)
+  - afficher le bouclier
+  - le faire disparaitre quand on le recupère
+  - ajouter les pv supplémentaire
+- régler problème de la bombe (Quentin)
+  - methode exploser (mettre des degats au joueur)
+  - la faire disparaitre une fois quelle a exploser
+
+bilan de fin d'itération :
+
+Les monstres se deplacent aléatoirement, la bombe fonctionne,
+il faut terminer de faire le bouclier
+
