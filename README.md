@@ -6,8 +6,7 @@ ainsi que le développement en méthode AGILE.
 
 ![Représentation de la méthode AGILE](https://cdn.edi-static.fr/image/upload/c_scale,f_auto,h_564,q_auto/v1/Img/FICHEPRATIQUE/2020/11/354321/Les-raisons-utiliser-methodes-Agile-entreprise-LE.jpg)
 
-## Participants du projet
-
+## Personnes participant au projet
 - Aloïs MASSON--CLAUDEZ
 - Baptiste DELABORDE
 - Quentin DIEUDONNÉ
