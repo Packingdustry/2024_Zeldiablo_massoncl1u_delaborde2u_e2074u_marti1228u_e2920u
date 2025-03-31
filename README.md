@@ -60,4 +60,14 @@ pour cette 3<sup>ème</sup> itération nous avons choisi de réalisé les foncti
 bilan de fin d'itération :
 
 Les monstres se déplacent aléatoirement, la bombe fonctionne,
-il faut terminer de faire le bouclier.
+il faut terminer de faire le bouclier.*
+
+## 4<sup>ème</sup> sprint
+
+pour cette dernière itération nous devons :
+
+- finir l'ajout d'un bouclier qui permet au joueur d'avoir plus de vie
+- revoir la conception de notre code (Baptiste, Aloïs)
+- afficher le bouclier (Quentin)
+  - le faire disparaitre quand on le recupère
+  - ajouter les pv supplémentaires au joueur
